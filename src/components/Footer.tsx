@@ -5,6 +5,12 @@ import Logo from "./Logo";
 import { HiMapPin, HiPhone, HiEnvelope } from "react-icons/hi2";
 
 export default function Footer() {
+  const [currentYear, setCurrentYear] = React.useState<number>(2026);
+
+  React.useEffect(() => {
+    setCurrentYear(new Date().getFullYear());
+  }, []);
+
   const navLinks = [
     { name: "HOME", href: "#home" },
     { name: "ABOUT", href: "#about" },
@@ -77,7 +83,7 @@ export default function Footer() {
         {/* Bottom Copyright Row */}
         <div className="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs font-medium text-gray-500">
           <p>
-            © {new Date().getFullYear()} DRYNO — Engineering Water Solution. All
+            © {currentYear} DRYNO — Engineering Water Solution. All
             rights reserved.{" "}
             <span className="text-gray-500 ml-1">
               In collaboration with{" "}
