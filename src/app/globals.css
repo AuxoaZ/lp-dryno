@@ -1,0 +1,65 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: var(--font-plus-jakarta), system-ui, sans-serif;
+  --color-deep-navy: #0B192C;
+  --color-deep-navy-dark: #060E1A;
+  --color-deep-navy-light: #162942;
+  --color-engineering-blue: #005B94;
+  --color-engineering-blue-hover: #004875;
+  --color-engineering-blue-light: #00A3FF;
+  --color-warm-white: #FAF9F6;
+  --color-warm-white-muted: #EAE8E1;
+  --color-charcoal: #1C2430;
+  --color-charcoal-light: #2D3748;
+}
+
+:root {
+  --background: #FAF9F6;
+  --foreground: #1C2430;
+}
+
+body {
+  background-color: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-plus-jakarta), sans-serif;
+  overflow-x: hidden;
+}
+
+/* Glassmorphism utilities */
+.glass-nav {
+  background: rgba(255, 255, 255, 0.92);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+.glass-pill {
+  background: rgba(11, 25, 44, 0.4);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+}
+
+.glass-button {
+  background: rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.4);
+}
+
+.glass-button:hover {
+  background: rgba(255, 255, 255, 0.25);
+  border-color: rgba(255, 255, 255, 0.7);
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #0B192C;
+}
+::-webkit-scrollbar-thumb {
+  background: #005B94;
+  border-radius: 4px;
+}
