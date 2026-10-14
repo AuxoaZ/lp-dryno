@@ -14,9 +14,9 @@ export default function Faq() {
   const faqs = [
     {
       question:
-        "Why is a groundwater investigation recommended before drilling?",
+        "Why is a ground water investigation recommended before drilling?",
       answer:
-        "Groundwater investigation (geoelectric survey) provides critical subsurface information to identify potential groundwater-bearing zones, estimate depth indications, and assess geological formations before drilling. This minimizes financial risk and helps select the most optimal drilling point.",
+        "Ground Water investigation (geoelectric survey) provides critical subsurface information to identify potential ground water-bearing zones, estimate depth indications, and assess geological formations before drilling. This minimizes financial risk and helps select the most optimal drilling point.",
     },
     {
       question: "How deep do you usually drill for deep wells in Bali & NTB?",
@@ -32,12 +32,12 @@ export default function Faq() {
       question:
         "What is SIPA and why is it necessary for my commercial project?",
       answer:
-        "SIPA (Surat Izin Pengusahaan Air Tanah) is the official government permit required for groundwater extraction and utilization. Having a valid SIPA ensures your villa, resort, or commercial project remains legally compliant with environmental regulations.",
+        "SIPA (Surat Izin Pengusahaan Air Tanah) is the official government permit required for ground water extraction and utilization. Having a valid SIPA ensures your villa, resort, or commercial project remains legally compliant with environmental regulations.",
     },
     {
       question: "Which areas in Indonesia does DRYNO cover?",
       answer:
-        "DRYNO provides integrated groundwater solutions across Bali, Nusa Lembongan, Nusa Penida, and West Nusa Tenggara (NTB) including Lombok and surrounding regions.",
+        "DRYNO provides integrated ground water solutions across Bali, Nusa Lembongan, Nusa Penida, and West Nusa Tenggara (NTB) including Lombok and surrounding regions.",
     },
     {
       question: "How do I request an accurate quotation for my project?",
@@ -68,7 +68,7 @@ export default function Faq() {
                 Got Questions? <br /> We Have Answers
               </h2>
               <p className="text-sm sm:text-base text-gray-600 font-normal leading-relaxed">
-                Find answers to common questions about groundwater
+                Find answers to common questions about ground water
                 investigation, deep well drilling, permit compliance (SIPA &
                 NPWPD ABT), and project timelines across Bali & NTB.
               </p>

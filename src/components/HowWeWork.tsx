@@ -22,7 +22,7 @@ export default function HowWeWork() {
     {
       number: "02",
       title: "Investigate",
-      desc: "Conduct groundwater investigation when required.",
+      desc: "Conduct ground water investigation when required.",
       icon: HiSparkles,
     },
     {

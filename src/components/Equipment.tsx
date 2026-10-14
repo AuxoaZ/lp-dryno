@@ -8,7 +8,7 @@ export default function Equipment() {
   const equipmentList = [
     {
       id: "admt",
-      category: "Groundwater Investigation",
+      category: "Ground Water Investigation",
       title: "Geoelectric Equipment",
       spec: "ADMT HT3 & Aerox",
       image: "/images/eq-1.jpg",
@@ -68,7 +68,7 @@ export default function Equipment() {
               </h2>
               <p className="text-sm sm:text-base text-gray-300 font-light leading-relaxed max-w-md">
                 Equipped with professional equipment and supported by an
-                experienced team to deliver reliable groundwater solutions.
+                experienced team to deliver reliable ground water solutions.
               </p>
             </div>
 

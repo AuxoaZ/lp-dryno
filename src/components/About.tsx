@@ -52,10 +52,10 @@ export default function About() {
 
               {/* Core Description */}
               <p className="text-sm sm:text-base text-gray-600 leading-relaxed font-normal">
-                DRYNO is an integrated groundwater solution provider
-                specializing in groundwater investigation, deep well drilling,
-                well installation, technical consultation, and
-                groundwater-related permit and administrative assistance.
+                DRYNO is an integrated ground water solution provider
+                specializing in ground water investigation, deep well drilling,
+                well installation, technical consultation, and ground
+                water-related permit and administrative assistance.
               </p>
             </div>
 
@@ -182,7 +182,7 @@ export default function About() {
                 <p className="text-sm text-gray-600 leading-relaxed mb-6 font-normal">
                   We work with villas, private estates, hotels, resorts,
                   residential and commercial developments, contractors,
-                  developers, and industrial facilities requiring groundwater
+                  developers, and industrial facilities requiring ground water
                   solutions for their projects.
                 </p>
               </div>
@@ -213,9 +213,9 @@ export default function About() {
                 </div>
                 <p className="text-sm text-gray-600 leading-relaxed mb-6 font-normal">
                   Our approach begins by understanding the project&apos;s water
-                  requirements and site conditions. When required, groundwater
+                  requirements and site conditions. When required, ground water
                   investigation is conducted to obtain subsurface information
-                  and identify potential groundwater zones before determining
+                  and identify potential ground water zones before determining
                   the appropriate drilling approach.
                 </p>
               </div>
@@ -226,7 +226,7 @@ export default function About() {
                   Data-Driven Drilling Strategy
                 </div>
                 <p className="text-xs text-gray-500">
-                  Minimizing risk & optimizing long-term groundwater yield.
+                  Minimizing risk & optimizing long-term ground water yield.
                 </p>
               </div>
             </div>
@@ -243,10 +243,10 @@ export default function About() {
                   </h4>
                 </div>
                 <p className="text-sm text-gray-600 leading-relaxed mb-6 font-normal">
-                  Beyond groundwater investigation and drilling, DRYNO also
+                  Beyond ground water investigation and drilling, DRYNO also
                   assists clients with SIPA and NPWPD ABT processing, providing
                   a more integrated solution from initial investigation to
-                  groundwater utilization compliance.
+                  ground water utilization compliance.
                 </p>
               </div>
 

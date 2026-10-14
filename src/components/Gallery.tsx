@@ -25,7 +25,7 @@ export default function Gallery() {
     },
     {
       id: "gallery-2",
-      title: "Groundwater Investigation & Survey",
+      title: "Ground Water Investigation & Survey",
       location: "Pecatu, Bali",
       src: "/images/gallery/gallery-2.jpeg",
       aspectRatio: "aspect-[3/4]",

@@ -82,8 +82,8 @@ export default function Hero() {
 
           {/* Description Paragraph */}
           <p className="text-sm sm:text-lg text-warm-white/80 leading-relaxed font-light mb-6 sm:mb-10 max-w-xl text-center md:text-start">
-            Groundwater investigation, professional deep well drilling, well
-            construction and groundwater compliance support for projects across
+            Ground Water investigation, professional deep well drilling, well
+            construction and ground water compliance support for projects across
             Bali and surrounding regions.
           </p>
 

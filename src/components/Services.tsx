@@ -52,35 +52,21 @@ export default function Services() {
 
   const services: ServiceItem[] = [
     {
-      id: "npwpd",
-      number: "01",
-      title: "NPWPD ABT Processing",
-      priceText: "Starting from",
-      priceHighlight: "IDR 6,000,000",
-      image: "/images/service-6.jpg",
-      icon: HiDocumentText,
-      shortDesc:
-        "Registration & administrative support for NPWPD ABT groundwater taxation compliance.",
-      fullDesc:
-        "DRYNO provides administrative assistance for the registration and processing of NPWPD ABT (Nomor Pokok Wajib Pajak Daerah Air Bawah Tanah) related to groundwater taxation and administrative compliance. Our team assists clients throughout the required administrative process based on applicable requirements and document readiness.",
-      note: "Final pricing may vary depending on project location, document readiness, administrative requirements, and scope of assistance.",
-    },
-    {
       id: "investigation",
-      number: "02",
-      title: "Groundwater Investigation",
+      number: "01",
+      title: "Ground Water Investigation",
       priceText: "Starting from",
       priceHighlight: "IDR 12,000,000",
       image: "/images/service-1.jpg",
       icon: HiChartBar,
       shortDesc:
-        "Geoelectric & subsurface investigation to assess groundwater zones before drilling.",
+        "Geoelectric & subsurface investigation to assess ground water zones before drilling.",
       fullDesc:
-        "Groundwater investigation using geoelectric and groundwater detection equipment to assess subsurface conditions and identify potential groundwater zones before drilling. The investigation provides technical information to support drilling-point selection and planning of the next project stage.",
+        "Ground Water investigation using geoelectric and ground water detection equipment to assess subsurface conditions and identify potential ground water zones before drilling. The investigation provides technical information to support drilling-point selection and planning of the next project stage.",
       includes: [
         "Site assessment",
-        "Geoelectric / groundwater investigation",
-        "Groundwater potential assessment",
+        "Geoelectric / ground water investigation",
+        "Ground Water potential assessment",
         "Interpretation of investigation results",
         "Recommended drilling point",
         "Preliminary depth indication",
@@ -88,26 +74,11 @@ export default function Services() {
       ],
       note: "Final price depends on project location, number of investigation points, site conditions, scope, and project requirements.",
       disclaimer:
-        "Do not claim or guarantee exact groundwater depth or groundwater availability.",
-    },
-    {
-      id: "sipa",
-      number: "03",
-      title: "SIPA Processing Assistance",
-      priceText: "Starting from",
-      priceHighlight: "IDR 50,000,000",
-      image: "/images/service-5.jpg",
-      icon: HiDocumentCheck,
-      shortDesc:
-        "Legal administrative assistance for Surat Izin Pengusahaan Air Tanah (SIPA).",
-      fullDesc:
-        "DRYNO provides assistance for the processing of SIPA (Surat Izin Pengusahaan Air Tanah) for projects requiring groundwater utilization permits. Our service supports clients throughout the required administrative process, including document preparation and coordination according to applicable requirements and regulations.",
-      note: "Final pricing depends on project location, document readiness, scope of work, technical requirements, and applicable regulatory requirements.",
-      disclaimer: "Does not guarantee permit approval.",
+        "Do not claim or guarantee exact ground water depth or ground water availability.",
     },
     {
       id: "drilling",
-      number: "04",
+      number: "02",
       title: "Deep Well Drilling",
       priceText: "Price",
       priceHighlight: "Request Quotation",
@@ -118,12 +89,11 @@ export default function Services() {
       fullDesc:
         "Professional deep well drilling according to project requirements, available investigation data, geological conditions, and actual field conditions. The drilling method, equipment, diameter, and target depth are determined according to the requirements and conditions of each project.",
       disclaimer:
-        "Do not advertise a universal drilling depth or guarantee groundwater availability.",
+        "Do not advertise a universal drilling depth or guarantee ground water availability.",
     },
-
     {
       id: "casing",
-      number: "05",
+      number: "03",
       title: "Well Installation & Casing",
       priceText: "Price",
       priceHighlight: "Request Quotation",
@@ -137,25 +107,54 @@ export default function Services() {
     },
     {
       id: "consultation",
-      number: "06",
+      number: "04",
       title: "Technical Consultation",
       priceText: "Price",
       priceHighlight: "Contact Us",
       image: "/images/service-4.jpg",
       icon: HiChatBubbleBottomCenterText,
       shortDesc:
-        "Expert technical guidance and strategic project planning for groundwater solutions.",
+        "Expert technical guidance and strategic project planning for ground water solutions.",
       fullDesc:
-        "Technical consultation for projects requiring groundwater solutions. Our experienced hydrogeological team provides end-to-end guidance for private, commercial, and industrial developments.",
+        "Technical consultation for projects requiring ground water solutions. Our experienced hydrogeological team provides end-to-end guidance for private, commercial, and industrial developments.",
       consultationTopics: [
         "Initial project assessment",
         "Water requirement discussion",
         "Site-condition assessment",
-        "Groundwater investigation strategy",
+        "Ground Water investigation strategy",
         "Drilling strategy",
         "Technical recommendation",
         "Project planning",
       ],
+    },
+    {
+      id: "sipa",
+      number: "05",
+      title: "SIPA Processing Assistance",
+      priceText: "Starting from",
+      priceHighlight: "IDR 50,000,000",
+      image: "/images/service-5.jpg",
+      icon: HiDocumentCheck,
+      shortDesc:
+        "Legal administrative assistance for Surat Izin Pengusahaan Air Tanah (SIPA).",
+      fullDesc:
+        "DRYNO provides assistance for the processing of SIPA (Surat Izin Pengusahaan Air Tanah) for projects requiring ground water utilization permits. Our service supports clients throughout the required administrative process, including document preparation and coordination according to applicable requirements and regulations.",
+      note: "Final pricing depends on project location, document readiness, scope of work, technical requirements, and applicable regulatory requirements.",
+      disclaimer: "Does not guarantee permit approval.",
+    },
+    {
+      id: "npwpd",
+      number: "06",
+      title: "NPWPD ABT Processing",
+      priceText: "Starting from",
+      priceHighlight: "IDR 6,000,000",
+      image: "/images/service-6.jpg",
+      icon: HiDocumentText,
+      shortDesc:
+        "Registration & administrative support for NPWPD ABT ground water taxation compliance.",
+      fullDesc:
+        "DRYNO provides administrative assistance for the registration and processing of NPWPD ABT (Nomor Pokok Wajib Pajak Daerah Air Bawah Tanah) related to ground water taxation and administrative compliance. Our team assists clients throughout the required administrative process based on applicable requirements and document readiness.",
+      note: "Final pricing may vary depending on project location, document readiness, administrative requirements, and scope of assistance.",
     },
   ];
 
@@ -171,7 +170,7 @@ export default function Services() {
             OUR SERVICES
           </span>
           <h2 className="text-2.5xl sm:text-4xl lg:text-5xl font-extrabold text-deep-navy leading-tight tracking-tight mb-3 sm:mb-4">
-            Comprehensive Groundwater & Permitting Solutions
+            Comprehensive Ground Water & Permitting Solutions
           </h2>
           <p className="text-sm sm:text-base text-gray-600 font-normal">
             Integrated services from initial geoelectric investigation and

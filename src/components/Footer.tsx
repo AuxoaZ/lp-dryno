@@ -31,7 +31,7 @@ export default function Footer() {
           <div className="lg:col-span-5 space-y-4">
             <Logo variant="light" />
             <p className="text-xs sm:text-sm text-gray-400 font-light max-w-sm leading-relaxed pt-2">
-              DRYNO — Engineering Water Solution is an integrated groundwater
+              DRYNO — Engineering Water Solution is an integrated ground water
               solution provider specializing in investigation, deep well
               drilling, well installation, technical consultation, and SIPA /
               NPWPD ABT permitting assistance across Bali & NTB.
@@ -83,8 +83,8 @@ export default function Footer() {
         {/* Bottom Copyright Row */}
         <div className="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs font-medium text-gray-500">
           <p>
-            © {currentYear} DRYNO — Engineering Water Solution. All
-            rights reserved.{" "}
+            © {currentYear} DRYNO — Engineering Water Solution. All rights
+            reserved.{" "}
             <span className="text-gray-500 ml-1">
               In collaboration with{" "}
               <a
@@ -98,7 +98,7 @@ export default function Footer() {
             </span>
           </p>
           <p className="text-[11px] text-gray-400">
-            Hydrogeology • Deep Well Drilling • Groundwater Permitting (SIPA &
+            Hydrogeology • Deep Well Drilling • Ground Water Permitting (SIPA &
             NPWPD ABT)
           </p>
         </div>

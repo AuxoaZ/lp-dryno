@@ -37,18 +37,18 @@ export default function Contact() {
   ];
 
   return (
-    <section id="contact" className="relative py-12 sm:py-20 lg:py-24 bg-white text-deep-navy overflow-hidden">
+    <section
+      id="contact"
+      className="relative py-12 sm:py-20 lg:py-24 bg-white text-deep-navy overflow-hidden"
+    >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        
         {/* Navy Card Container (White Section, Navy Card) */}
         <div className="relative rounded-3xl bg-gradient-to-br from-deep-navy via-deep-navy-dark to-charcoal text-white p-6 sm:p-12 lg:p-16 shadow-2xl overflow-hidden">
-          
           {/* Decorative Glowing Orbs */}
           <div className="absolute top-0 right-0 w-96 h-96 bg-engineering-blue/20 rounded-full blur-3xl pointer-events-none" />
           <div className="absolute bottom-0 left-0 w-96 h-96 bg-engineering-blue-light/10 rounded-full blur-3xl pointer-events-none" />
 
           <div className="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-16 items-start">
-            
             {/* Left Side: Header & Info (lg:col-span-5) */}
             <div className="lg:col-span-5 space-y-6 sm:space-y-8 flex flex-col justify-between h-full">
               <div>
@@ -66,7 +66,9 @@ export default function Contact() {
                 </h2>
 
                 <p className="text-sm sm:text-base text-gray-300 font-light leading-relaxed">
-                  Have a new groundwater project or need assistance with deep well drilling, geoelectric investigation, or SIPA permitting? Our team is ready to evaluate your site.
+                  Have a new ground water project or need assistance with deep
+                  well drilling, geoelectric investigation, or SIPA permitting?
+                  Our team is ready to evaluate your site.
                 </p>
               </div>
 
@@ -119,7 +121,10 @@ export default function Contact() {
               <div className="p-4 rounded-2xl bg-white/5 border border-white/10 flex items-center gap-3">
                 <HiSparkles className="w-5 h-5 text-engineering-blue-light shrink-0" />
                 <p className="text-xs text-gray-300">
-                  <strong className="text-white">10+ Years Field Experience</strong> in hydrogeology, drilling & regulatory compliance.
+                  <strong className="text-white">
+                    10+ Years Field Experience
+                  </strong>{" "}
+                  in hydrogeology, drilling & regulatory compliance.
                 </p>
               </div>
             </div>
@@ -135,7 +140,8 @@ export default function Contact() {
                     Thank You for Reaching Out!
                   </h3>
                   <p className="text-sm text-gray-300 max-w-md mx-auto leading-relaxed">
-                    We have received your project inquiry. Our hydrogeology team will review your requirements and get back to you shortly.
+                    We have received your project inquiry. Our hydrogeology team
+                    will review your requirements and get back to you shortly.
                   </p>
                   <button
                     onClick={() => setSubmitted(false)}
@@ -157,7 +163,9 @@ export default function Contact() {
                         required
                         placeholder="John Doe"
                         value={formData.name}
-                        onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                        onChange={(e) =>
+                          setFormData({ ...formData, name: e.target.value })
+                        }
                         className="w-full px-4 py-3.5 rounded-xl bg-white/10 border border-white/15 text-white placeholder-gray-400 focus:outline-none focus:border-engineering-blue-light focus:bg-white/15 transition-all text-sm"
                       />
                     </div>
@@ -172,7 +180,9 @@ export default function Contact() {
                         required
                         placeholder="Maison Resort Uluwatu"
                         value={formData.company}
-                        onChange={(e) => setFormData({ ...formData, company: e.target.value })}
+                        onChange={(e) =>
+                          setFormData({ ...formData, company: e.target.value })
+                        }
                         className="w-full px-4 py-3.5 rounded-xl bg-white/10 border border-white/15 text-white placeholder-gray-400 focus:outline-none focus:border-engineering-blue-light focus:bg-white/15 transition-all text-sm"
                       />
                     </div>
@@ -189,7 +199,9 @@ export default function Contact() {
                         required
                         placeholder="Pecatu, Uluwatu, Bali"
                         value={formData.location}
-                        onChange={(e) => setFormData({ ...formData, location: e.target.value })}
+                        onChange={(e) =>
+                          setFormData({ ...formData, location: e.target.value })
+                        }
                         className="w-full px-4 py-3.5 rounded-xl bg-white/10 border border-white/15 text-white placeholder-gray-400 focus:outline-none focus:border-engineering-blue-light focus:bg-white/15 transition-all text-sm"
                       />
                     </div>
@@ -201,11 +213,20 @@ export default function Contact() {
                       </label>
                       <select
                         value={formData.projectType}
-                        onChange={(e) => setFormData({ ...formData, projectType: e.target.value })}
+                        onChange={(e) =>
+                          setFormData({
+                            ...formData,
+                            projectType: e.target.value,
+                          })
+                        }
                         className="w-full px-4 py-3.5 rounded-xl bg-deep-navy border border-white/15 text-white focus:outline-none focus:border-engineering-blue-light transition-all text-sm cursor-pointer"
                       >
                         {projectTypes.map((type) => (
-                          <option key={type} value={type} className="bg-deep-navy text-white">
+                          <option
+                            key={type}
+                            value={type}
+                            className="bg-deep-navy text-white"
+                          >
                             {type}
                           </option>
                         ))}
@@ -223,7 +244,9 @@ export default function Contact() {
                       required
                       placeholder="Tell us about your water requirements, site conditions, or specific service needs..."
                       value={formData.message}
-                      onChange={(e) => setFormData({ ...formData, message: e.target.value })}
+                      onChange={(e) =>
+                        setFormData({ ...formData, message: e.target.value })
+                      }
                       className="w-full px-4 py-3.5 rounded-xl bg-white/10 border border-white/15 text-white placeholder-gray-400 focus:outline-none focus:border-engineering-blue-light focus:bg-white/15 transition-all text-sm resize-none"
                     />
                   </div>
@@ -239,11 +262,8 @@ export default function Contact() {
                 </form>
               )}
             </div>
-
           </div>
-
         </div>
-
       </div>
     </section>
   );

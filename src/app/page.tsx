@@ -2,6 +2,7 @@ import React from "react";
 import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
 import About from "@/components/About";
+import WaterChallenges from "@/components/WaterChallenges";
 import Services from "@/components/Services";
 import HowWeWork from "@/components/HowWeWork";
 import Projects from "@/components/Projects";
@@ -18,6 +19,7 @@ export default function Home() {
       <Navbar />
       <Hero />
       <About />
+      <WaterChallenges />
       <Services />
       <HowWeWork />
       <Projects />
@@ -30,6 +32,3 @@ export default function Home() {
     </main>
   );
 }
-
-
-

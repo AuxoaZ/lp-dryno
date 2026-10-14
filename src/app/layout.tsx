@@ -12,12 +12,12 @@ const plusJakartaSans = Plus_Jakarta_Sans({
 export const metadata: Metadata = {
   title: "DRYNO — Engineering Water Solution",
   description:
-    "Groundwater investigation, professional deep well drilling, well construction and groundwater compliance support for projects across Bali and surrounding regions.",
+    "Ground Water investigation, professional deep well drilling, well construction and ground water compliance support for projects across Bali and surrounding regions.",
   keywords: [
     "DRYNO",
     "Water Solution",
     "Deep Well Drilling",
-    "Groundwater Investigation",
+    "Ground Water Investigation",
     "Bali Drilling",
     "Nusa Penida",
     "Nusa Lembongan",
@@ -31,8 +31,15 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${plusJakartaSans.variable} font-sans antialiased scroll-smooth`}>
-      <body className="min-h-screen bg-warm-white text-charcoal flex flex-col">
+    <html
+      lang="en"
+      suppressHydrationWarning
+      className={`${plusJakartaSans.variable} font-sans antialiased scroll-smooth`}
+    >
+      <body
+        suppressHydrationWarning
+        className="min-h-screen bg-warm-white text-charcoal flex flex-col"
+      >
         {children}
       </body>
     </html>
