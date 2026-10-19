@@ -24,7 +24,7 @@ export default function Home() {
       <HowWeWork />
       <Projects />
       <Equipment />
-      <Gallery />
+      {/* <Gallery /> */}
       <Faq />
       <Contact />
       <Footer />

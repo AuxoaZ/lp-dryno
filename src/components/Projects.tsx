@@ -1,13 +1,46 @@
 "use client";
 
-import React, { useRef } from "react";
+import React, { useRef, useState, useEffect, useCallback } from "react";
 import Image from "next/image";
-import { HiChevronLeft, HiChevronRight, HiArrowRight } from "react-icons/hi2";
+import {
+  HiChevronLeft,
+  HiChevronRight,
+  HiArrowRight,
+  HiXMark,
+  HiPhoto,
+  HiVideoCamera,
+  HiPlay,
+  HiMagnifyingGlassPlus,
+} from "react-icons/hi2";
+import { FaWhatsapp } from "react-icons/fa";
+
+interface MediaItem {
+  type: "image" | "video";
+  src: string;
+  title: string;
+  description?: string;
+  poster?: string;
+}
+
+interface Project {
+  id: string;
+  title: string;
+  location: string;
+  date: string;
+  scope: string;
+  finalDepth: string;
+  waterEncounter: string;
+  waterDischarge: string;
+  image: string;
+  gallery: MediaItem[];
+}
 
 export default function Projects() {
   const scrollContainerRef = useRef<HTMLDivElement>(null);
+  const [selectedProject, setSelectedProject] = useState<Project | null>(null);
+  const [currentImageIndex, setCurrentImageIndex] = useState<number>(0);
 
-  const projects = [
+  const projects: Project[] = [
     {
       id: "maison-horizon",
       title: "Maison Horizon Uluwatu",
@@ -18,6 +51,37 @@ export default function Projects() {
       waterEncounter: "±200 m",
       waterDischarge: "10 m³/h",
       image: "/images/project-maison.jpg",
+      gallery: [
+        {
+          type: "video",
+          src: "/videos/Maison.mp4",
+          poster: "/images/project/maison1.webp",
+          title: "Video Operasi Pengeboran - Maison Horizon",
+          description:
+            "Dokumentasi video langsung proses pengeboran sumur dalam hingga kedalaman 220 meter di kawasan Pecatu, Uluwatu.",
+        },
+        {
+          type: "image",
+          src: "/images/project/maison1.webp",
+          title: "Ground Water Investigation & Rig Setup",
+          description:
+            "Setup alat investigasi geolistrik dan persiapan titik bor sumur dalam Maison Horizon.",
+        },
+        {
+          type: "image",
+          src: "/images/project/maison2.webp",
+          title: "Deep Drilling & Water Discharge Testing",
+          description:
+            "Proses pengeboran mencapai 220 m dengan hasil debit air melimpah 10 m³/jam.",
+        },
+        {
+          type: "image",
+          src: "/images/project-maison.jpg",
+          title: "Maison Horizon Villa Area",
+          description:
+            "Area proyek villa di Pecatu, Uluwatu yang kini memiliki pasokan air mandiri stabil.",
+        },
+      ],
     },
     {
       id: "fira-uluwatu",
@@ -30,6 +94,44 @@ export default function Projects() {
       waterEncounter: "±150 m",
       waterDischarge: "5 m³/h",
       image: "/images/project-fira.jpg",
+      gallery: [
+        {
+          type: "video",
+          src: "/videos/Fira Uluwatu Cemongkak.mp4",
+          poster: "/images/project/Fira Uluwatu Cemongkak1.webp",
+          title: "Video Dokumentasi Lapangan - Fira Uluwatu Cemongkak",
+          description:
+            "Rekaman video pengerjaan pengeboran sumur dalam menembus formasi batuan karst kapur di Bingin, Uluwatu.",
+        },
+        {
+          type: "image",
+          src: "/images/project/Fira Uluwatu Cemongkak1.webp",
+          title: "Heavy Rig Mobilization & Site Setup",
+          description:
+            "Mobilisasi heavy rig dan positioning alat di lokasi Cemongkak, Bingin, Uluwatu.",
+        },
+        {
+          type: "image",
+          src: "/images/project/Fira Uluwatu Cemongkak2.webp",
+          title: "Deep Well Drilling Operation",
+          description:
+            "Pengeboran formasi batuan karst kapur keras menembus kedalaman 170 meter.",
+        },
+        {
+          type: "image",
+          src: "/images/project/Fira Uluwatu Cemongkak3.webp",
+          title: "Casing Installation & Well Development",
+          description:
+            "Instalasi pipa casing baja dan konstruksi sumur dengan debit air 5 m³/jam.",
+        },
+        {
+          type: "image",
+          src: "/images/project-fira.jpg",
+          title: "Fira Uluwatu Villa Complex",
+          description:
+            "Kompleks villa premium di Bingin Uluwatu dengan sistem air tanah mandiri.",
+        },
+      ],
     },
     {
       id: "bebas-villa",
@@ -41,6 +143,52 @@ export default function Projects() {
       waterEncounter: "±90 m",
       waterDischarge: "5 m³/h",
       image: "/images/project-bebas.jpg",
+      gallery: [
+        {
+          type: "video",
+          src: "/videos/Bebas Villa1.mp4",
+          poster: "/images/project/Bebas Villa1.webp",
+          title: "Video Pengeboran Lapangan Bagian 1 - Bebas Villa",
+          description:
+            "Dokumentasi video penetrasi batuan dan instalasi alat pengeboran sumur dalam 105 m di Bingin.",
+        },
+        {
+          type: "video",
+          src: "/videos/Bebas Villa2.mp4",
+          poster: "/images/project/Tool Equipment_result.webp",
+          title: "Video Pengujian & Debit Air Bagian 2 - Bebas Villa",
+          description:
+            "Dokumentasi video semburan air tanah dan pengujian debit 5 m³/jam yang berhasil didapatkan.",
+        },
+        {
+          type: "image",
+          src: "/images/project/Bebas Villa1.webp",
+          title: "Well Drilling in Bingin",
+          description:
+            "Operasi pengeboran sumur dalam 105 m untuk menyuplai air bersih Bebas Villa.",
+        },
+        {
+          type: "image",
+          src: "/images/project/Tool Equipment_result.webp",
+          title: "Heavy-Duty Drilling Rig on Site",
+          description:
+            "Rig hidrolik bertenaga tinggi untuk menembus formasi batuan keras perbukitan Uluwatu.",
+        },
+        {
+          type: "image",
+          src: "/images/project/Tool Equipment 2_result.webp",
+          title: "High-Pressure DTH Hammer System",
+          description:
+            "Sistem kompresor bertekanan tinggi dan mata bor DTH hammer di lokasi proyek.",
+        },
+        {
+          type: "image",
+          src: "/images/project-bebas.jpg",
+          title: "Bebas Villa Uluwatu Overview",
+          description:
+            "Kawasan villa eksklusif di Bingin Uluwatu dengan solusi air bersih mandiri.",
+        },
+      ],
     },
   ];
 
@@ -53,6 +201,89 @@ export default function Projects() {
       });
     }
   };
+
+  const openGallery = (project: Project, imageIndex: number = 0) => {
+    setSelectedProject(project);
+    setCurrentImageIndex(imageIndex);
+  };
+
+  const closeGallery = useCallback(() => {
+    setSelectedProject(null);
+    setCurrentImageIndex(0);
+  }, []);
+
+  const handlePrevImage = useCallback(
+    (e?: React.MouseEvent) => {
+      e?.stopPropagation();
+      if (!selectedProject) return;
+      setCurrentImageIndex((prev) =>
+        prev === 0 ? selectedProject.gallery.length - 1 : prev - 1
+      );
+    },
+    [selectedProject]
+  );
+
+  const handleNextImage = useCallback(
+    (e?: React.MouseEvent) => {
+      e?.stopPropagation();
+      if (!selectedProject) return;
+      setCurrentImageIndex((prev) =>
+        prev === selectedProject.gallery.length - 1 ? 0 : prev + 1
+      );
+    },
+    [selectedProject]
+  );
+
+  const handlePrevProject = (e?: React.MouseEvent) => {
+    e?.stopPropagation();
+    if (!selectedProject) return;
+    const currentIndex = projects.findIndex((p) => p.id === selectedProject.id);
+    const prevProject =
+      currentIndex === 0
+        ? projects[projects.length - 1]
+        : projects[currentIndex - 1];
+    setSelectedProject(prevProject);
+    setCurrentImageIndex(0);
+  };
+
+  const handleNextProject = (e?: React.MouseEvent) => {
+    e?.stopPropagation();
+    if (!selectedProject) return;
+    const currentIndex = projects.findIndex((p) => p.id === selectedProject.id);
+    const nextProject =
+      currentIndex === projects.length - 1
+        ? projects[0]
+        : projects[currentIndex + 1];
+    setSelectedProject(nextProject);
+    setCurrentImageIndex(0);
+  };
+
+  // Keyboard navigation & body scroll lock
+  useEffect(() => {
+    if (!selectedProject) return;
+
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        closeGallery();
+      } else if (e.key === "ArrowLeft") {
+        handlePrevImage();
+      } else if (e.key === "ArrowRight") {
+        handleNextImage();
+      }
+    };
+
+    const originalOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    window.addEventListener("keydown", handleKeyDown);
+
+    return () => {
+      document.body.style.overflow = originalOverflow;
+      window.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [selectedProject, closeGallery, handlePrevImage, handleNextImage]);
+
+  const currentMedia: MediaItem | undefined =
+    selectedProject?.gallery[currentImageIndex];
 
   return (
     <section
@@ -108,77 +339,368 @@ export default function Projects() {
           ref={scrollContainerRef}
           className="flex overflow-x-auto gap-6 pb-4 scroll-smooth snap-x snap-mandatory [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden"
         >
-          {projects.map((project) => (
-            <div
-              key={project.id}
-              className="min-w-[300px] sm:min-w-[360px] lg:min-w-[380px] flex-1 snap-start group rounded-2xl bg-warm-white border border-gray-100/80 shadow-xs hover:shadow-xl transition-all duration-300 flex flex-col justify-between overflow-hidden"
-            >
-              {/* Project Image */}
-              <div className="relative h-48 sm:h-52 w-full overflow-hidden bg-gray-100">
-                <Image
-                  src={project.image}
-                  alt={project.title}
-                  fill
-                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                  className="object-cover object-center group-hover:scale-105 transition-transform duration-500"
-                />
-                <div className="absolute top-3 right-3 px-3 py-1 rounded-full bg-deep-navy/80 backdrop-blur-xs text-[10px] font-bold text-white tracking-wider">
-                  {project.date}
+          {projects.map((project) => {
+            const photoCount = project.gallery.filter(
+              (m) => m.type === "image"
+            ).length;
+            const videoCount = project.gallery.filter(
+              (m) => m.type === "video"
+            ).length;
+
+            return (
+              <div
+                key={project.id}
+                onClick={() => openGallery(project, 0)}
+                onKeyDown={(e) => {
+                  if (e.key === "Enter" || e.key === " ") {
+                    e.preventDefault();
+                    openGallery(project, 0);
+                  }
+                }}
+                role="button"
+                tabIndex={0}
+                aria-label={`Buka galeri & video proyek ${project.title}`}
+                className="min-w-[300px] sm:min-w-[360px] lg:min-w-[380px] flex-1 snap-start group rounded-2xl bg-warm-white border border-gray-100/80 shadow-xs hover:shadow-2xl hover:border-engineering-blue/40 transition-all duration-300 flex flex-col justify-between overflow-hidden cursor-pointer focus:outline-none focus:ring-2 focus:ring-engineering-blue"
+              >
+                {/* Project Image with Photo & Video Badges + Hover Overlay */}
+                <div className="relative h-48 sm:h-52 w-full overflow-hidden bg-gray-100">
+                  <Image
+                    src={project.image}
+                    alt={project.title}
+                    fill
+                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                    className="object-cover object-center group-hover:scale-105 transition-transform duration-500"
+                  />
+
+                  {/* Date Badge */}
+                  <div className="absolute top-3 right-3 px-3 py-1 rounded-full bg-deep-navy/80 backdrop-blur-xs text-[10px] font-bold text-white tracking-wider z-10">
+                    {project.date}
+                  </div>
+
+                  {/* Photo & Video Count Badges */}
+                  <div className="absolute bottom-3 left-3 flex items-center gap-1.5 z-10">
+                    <span className="px-2.5 py-1 rounded-full bg-deep-navy/85 backdrop-blur-xs text-[11px] font-semibold text-white/95 flex items-center gap-1 shadow-sm">
+                      <HiPhoto className="w-3.5 h-3.5 text-engineering-blue-light" />
+                      <span>{photoCount} Foto</span>
+                    </span>
+                    {videoCount > 0 && (
+                      <span className="px-2 py-1 rounded-full bg-red-600/90 backdrop-blur-xs text-[10px] font-bold text-white flex items-center gap-1 shadow-sm">
+                        <HiVideoCamera className="w-3.5 h-3.5" />
+                        <span>{videoCount} Video</span>
+                      </span>
+                    )}
+                  </div>
+
+                  {/* Hover Overlay */}
+                  <div className="absolute inset-0 bg-deep-navy/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center z-10">
+                    <span className="px-3.5 py-1.5 rounded-full bg-white/95 text-deep-navy text-xs font-bold shadow-lg flex items-center gap-1.5 transform translate-y-2 group-hover:translate-y-0 transition-transform duration-300">
+                      <HiMagnifyingGlassPlus className="w-4 h-4 text-engineering-blue" />
+                      Lihat Dokumentasi & Video
+                    </span>
+                  </div>
+                </div>
+
+                {/* Card Main Info */}
+                <div className="p-5 sm:p-6 flex flex-col justify-between flex-grow">
+                  <div>
+                    <h3 className="text-lg font-black text-deep-navy leading-snug mb-1 group-hover:text-engineering-blue transition-colors">
+                      {project.title}
+                    </h3>
+                    <p className="text-xs font-medium text-gray-500 mb-3">
+                      {project.location} &nbsp;|&nbsp;{" "}
+                      <span className="text-gray-400">{project.date}</span>
+                    </p>
+                    <span className="inline-block px-2.5 py-1 rounded-md bg-engineering-blue/10 text-engineering-blue text-[11px] font-semibold mb-4">
+                      {project.scope}
+                    </span>
+                  </div>
+
+                  {/* 3 Metric Columns */}
+                  <div>
+                    <div className="grid grid-cols-3 gap-2 pt-4 border-t border-gray-200/60 text-center">
+                      {/* Metric 1 */}
+                      <div className="border-r border-gray-200/60 pr-1">
+                        <span className="text-base sm:text-lg font-black text-deep-navy block leading-none mb-1">
+                          {project.finalDepth}
+                        </span>
+                        <span className="text-[10px] font-semibold text-gray-400 uppercase tracking-wider block">
+                          Final Depth
+                        </span>
+                      </div>
+
+                      {/* Metric 2 */}
+                      <div className="border-r border-gray-200/60 px-1">
+                        <span className="text-base sm:text-lg font-black text-deep-navy block leading-none mb-1">
+                          {project.waterEncounter}
+                        </span>
+                        <span className="text-[10px] font-semibold text-gray-400 uppercase tracking-wider block">
+                          Water Encounter
+                        </span>
+                      </div>
+
+                      {/* Metric 3 */}
+                      <div className="pl-1">
+                        <span className="text-base sm:text-lg font-black text-deep-navy block leading-none mb-1">
+                          {project.waterDischarge}
+                        </span>
+                        <span className="text-[10px] font-semibold text-gray-400 uppercase tracking-wider block">
+                          Water Discharge
+                        </span>
+                      </div>
+                    </div>
+
+                    {/* View Documentation Link Bar */}
+                    <div className="mt-4 pt-3 border-t border-gray-100 flex items-center justify-between text-xs font-bold text-engineering-blue group-hover:text-engineering-blue-hover transition-colors">
+                      <span className="flex items-center gap-1.5">
+                        <HiPhoto className="w-4 h-4" />
+                        Dokumentasi & Video ({project.gallery.length} Media)
+                      </span>
+                      <span className="transform group-hover:translate-x-1 transition-transform">
+                        →
+                      </span>
+                    </div>
+                  </div>
                 </div>
               </div>
+            );
+          })}
+        </div>
+      </div>
 
-              {/* Card Main Info */}
-              <div className="p-5 sm:p-6 flex flex-col justify-between flex-grow">
-                <div>
-                  <h3 className="text-lg font-black text-deep-navy leading-snug mb-1">
-                    {project.title}
-                  </h3>
-                  <p className="text-xs font-medium text-gray-500 mb-3">
-                    {project.location} &nbsp;|&nbsp;{" "}
-                    <span className="text-gray-400">{project.date}</span>
-                  </p>
-                  <span className="inline-block px-2.5 py-1 rounded-md bg-engineering-blue/10 text-engineering-blue text-[11px] font-semibold mb-4">
-                    {project.scope}
+      {/* Project Gallery & Video Modal */}
+      {selectedProject && currentMedia && (
+        <div
+          className="fixed inset-0 z-50 bg-black/85 backdrop-blur-md flex items-center justify-center p-3 sm:p-5 lg:p-6"
+          onClick={closeGallery}
+        >
+          <div
+            className="relative w-full max-w-4xl lg:max-w-5xl bg-deep-navy border border-white/10 rounded-2xl sm:rounded-3xl shadow-2xl overflow-hidden flex flex-col max-h-[95vh]"
+            onClick={(e) => e.stopPropagation()}
+          >
+            {/* Modal Header */}
+            <div className="flex items-center justify-between px-4 sm:px-6 py-3.5 border-b border-white/10 bg-deep-navy-dark/70">
+              <div className="pr-4">
+                <div className="flex items-center gap-2 mb-1 flex-wrap">
+                  <span className="text-[10px] font-bold tracking-widest text-engineering-blue-light uppercase bg-engineering-blue/20 px-2 py-0.5 rounded border border-engineering-blue/30">
+                    DOKUMENTASI PROYEK
+                  </span>
+                  <span className="text-xs text-gray-400 hidden sm:inline">•</span>
+                  <span className="text-xs text-gray-300 font-medium">
+                    {selectedProject.location}
+                  </span>
+                  <span className="text-xs text-gray-500 hidden sm:inline">•</span>
+                  <span className="text-xs text-gray-400">
+                    {selectedProject.date}
                   </span>
                 </div>
+                <h3 className="text-base sm:text-xl font-bold text-white tracking-tight">
+                  {selectedProject.title}
+                </h3>
+              </div>
 
-                {/* 3 Metric Columns (Matching Design Reference Image) */}
-                <div className="grid grid-cols-3 gap-2 pt-4 border-t border-gray-200/60 text-center">
-                  {/* Metric 1 */}
-                  <div className="border-r border-gray-200/60 pr-1">
-                    <span className="text-base sm:text-lg font-black text-deep-navy block leading-none mb-1">
-                      {project.finalDepth}
+              {/* Close Button */}
+              <button
+                onClick={closeGallery}
+                className="w-10 h-10 rounded-full bg-white/10 hover:bg-white/20 text-white flex items-center justify-center transition-colors flex-shrink-0"
+                aria-label="Tutup galeri (Esc)"
+                title="Tutup (Esc)"
+              >
+                <HiXMark className="w-6 h-6" />
+              </button>
+            </div>
+
+            {/* Main Media Display Area (Image or Video) */}
+            <div className="relative w-full h-[42vh] sm:h-[50vh] md:h-[54vh] bg-black/80 flex items-center justify-center select-none overflow-hidden">
+              {currentMedia.type === "video" ? (
+                <div className="relative w-full h-full flex items-center justify-center p-2 sm:p-3 bg-black">
+                  <video
+                    key={currentMedia.src}
+                    src={currentMedia.src}
+                    poster={currentMedia.poster}
+                    controls
+                    playsInline
+                    autoPlay
+                    className="max-h-[38vh] sm:max-h-[46vh] md:max-h-[50vh] w-auto max-w-full rounded-xl shadow-2xl bg-black object-contain focus:outline-none"
+                  >
+                    Browser Anda tidak mendukung pemutaran video tag.
+                  </video>
+                </div>
+              ) : (
+                <Image
+                  key={currentMedia.src}
+                  src={currentMedia.src}
+                  alt={currentMedia.title}
+                  fill
+                  priority
+                  sizes="(max-width: 1024px) 100vw, 1100px"
+                  className="object-contain"
+                />
+              )}
+
+              {/* Media Type & Counter Badge */}
+              <div className="absolute top-3 right-3 px-3 py-1 rounded-full bg-black/70 backdrop-blur-md text-xs font-semibold text-white tracking-wider border border-white/10 z-20 flex items-center gap-1.5">
+                {currentMedia.type === "video" ? (
+                  <span className="flex items-center gap-1 text-red-400 font-bold">
+                    <HiVideoCamera className="w-3.5 h-3.5" />
+                    Video
+                  </span>
+                ) : (
+                  <span className="flex items-center gap-1 text-engineering-blue-light font-bold">
+                    <HiPhoto className="w-3.5 h-3.5" />
+                    Foto
+                  </span>
+                )}
+                <span className="text-white/80">
+                  {currentImageIndex + 1} / {selectedProject.gallery.length}
+                </span>
+              </div>
+
+              {/* Navigation Arrows (if > 1 media item) */}
+              {selectedProject.gallery.length > 1 && (
+                <>
+                  <button
+                    onClick={handlePrevImage}
+                    aria-label="Media sebelumnya"
+                    className="absolute left-3 sm:left-4 top-1/2 -translate-y-1/2 w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-black/60 hover:bg-black/90 text-white border border-white/15 flex items-center justify-center transition-all duration-200 active:scale-95 backdrop-blur-sm z-20"
+                  >
+                    <HiChevronLeft className="w-6 h-6" />
+                  </button>
+                  <button
+                    onClick={handleNextImage}
+                    aria-label="Media selanjutnya"
+                    className="absolute right-3 sm:right-4 top-1/2 -translate-y-1/2 w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-black/60 hover:bg-black/90 text-white border border-white/15 flex items-center justify-center transition-all duration-200 active:scale-95 backdrop-blur-sm z-20"
+                  >
+                    <HiChevronRight className="w-6 h-6" />
+                  </button>
+                </>
+              )}
+            </div>
+
+            {/* Media Caption & Description Bar */}
+            <div className="px-4 py-2.5 sm:px-6 bg-deep-navy-dark/90 border-t border-white/10 flex flex-col gap-0.5">
+              <div className="flex items-center gap-2">
+                {currentMedia.type === "video" ? (
+                  <span className="px-2 py-0.5 rounded bg-red-500/20 text-red-400 border border-red-500/30 text-[10px] font-bold uppercase tracking-wider flex items-center gap-1">
+                    <HiVideoCamera className="w-3 h-3" />
+                    Video Lapangan
+                  </span>
+                ) : (
+                  <span className="px-2 py-0.5 rounded bg-engineering-blue/20 text-engineering-blue-light border border-engineering-blue/30 text-[10px] font-bold uppercase tracking-wider flex items-center gap-1">
+                    <HiPhoto className="w-3 h-3" />
+                    Foto Dokumentasi
+                  </span>
+                )}
+                <h4 className="text-sm sm:text-base font-bold text-white leading-snug line-clamp-1">
+                  {currentMedia.title}
+                </h4>
+              </div>
+              {currentMedia.description && (
+                <p className="text-xs text-gray-300 line-clamp-1 sm:line-clamp-2 pl-0.5">
+                  {currentMedia.description}
+                </p>
+              )}
+            </div>
+
+            {/* Modal Bottom: Thumbnails & Specs Bar */}
+            <div className="p-3 sm:p-5 bg-deep-navy border-t border-white/10 flex flex-col gap-3">
+              {/* Thumbnails Row */}
+              <div className="flex items-center gap-2 sm:gap-3 overflow-x-auto pb-1 [scrollbar-width:thin]">
+                {selectedProject.gallery.map((media, idx) => (
+                  <button
+                    key={idx}
+                    onClick={() => setCurrentImageIndex(idx)}
+                    aria-label={`Pilih ${media.type === "video" ? "video" : "foto"} ${media.title}`}
+                    className={`relative flex-shrink-0 w-16 h-12 sm:w-20 sm:h-14 rounded-lg overflow-hidden transition-all duration-200 ${
+                      currentImageIndex === idx
+                        ? "ring-2 ring-engineering-blue-light ring-offset-2 ring-offset-deep-navy opacity-100 scale-105"
+                        : "opacity-50 hover:opacity-85"
+                    }`}
+                  >
+                    <Image
+                      src={media.poster || media.src}
+                      alt={media.title}
+                      fill
+                      sizes="80px"
+                      className="object-cover"
+                    />
+                    {media.type === "video" && (
+                      <div className="absolute inset-0 bg-black/40 flex items-center justify-center">
+                        <div className="w-6 h-6 rounded-full bg-red-600/90 text-white flex items-center justify-center shadow-md">
+                          <HiPlay className="w-3.5 h-3.5 translate-x-0.5" />
+                        </div>
+                      </div>
+                    )}
+                  </button>
+                ))}
+              </div>
+
+              {/* Project Specs & Switchers */}
+              <div className="pt-2 border-t border-white/5 flex flex-wrap items-center justify-between gap-3 text-xs">
+                {/* Specs */}
+                <div className="flex items-center gap-4 sm:gap-6 text-gray-300">
+                  <div>
+                    <span className="text-[10px] text-gray-400 block uppercase font-medium">
+                      Kedalaman
                     </span>
-                    <span className="text-[10px] font-semibold text-gray-400 uppercase tracking-wider block">
-                      Final Depth
+                    <span className="font-bold text-white">
+                      {selectedProject.finalDepth}
                     </span>
                   </div>
-
-                  {/* Metric 2 */}
-                  <div className="border-r border-gray-200/60 px-1">
-                    <span className="text-base sm:text-lg font-black text-deep-navy block leading-none mb-1">
-                      {project.waterEncounter}
+                  <div className="w-px h-6 bg-white/10" />
+                  <div>
+                    <span className="text-[10px] text-gray-400 block uppercase font-medium">
+                      Temuan Air
                     </span>
-                    <span className="text-[10px] font-semibold text-gray-400 uppercase tracking-wider block">
-                      Water Encounter
-                    </span>
-                  </div>
-
-                  {/* Metric 3 */}
-                  <div className="pl-1">
-                    <span className="text-base sm:text-lg font-black text-deep-navy block leading-none mb-1">
-                      {project.waterDischarge}
-                    </span>
-                    <span className="text-[10px] font-semibold text-gray-400 uppercase tracking-wider block">
-                      Water Discharge
+                    <span className="font-bold text-white">
+                      {selectedProject.waterEncounter}
                     </span>
                   </div>
+                  <div className="w-px h-6 bg-white/10" />
+                  <div>
+                    <span className="text-[10px] text-gray-400 block uppercase font-medium">
+                      Debit Air
+                    </span>
+                    <span className="font-bold text-white">
+                      {selectedProject.waterDischarge}
+                    </span>
+                  </div>
+                </div>
+
+                {/* Project Switchers & WhatsApp Consultation CTA */}
+                <div className="flex items-center gap-2 flex-wrap">
+                  <button
+                    onClick={handlePrevProject}
+                    className="px-2.5 sm:px-3 py-1.5 rounded-lg bg-white/5 hover:bg-white/15 text-gray-300 hover:text-white transition-colors text-xs font-medium flex items-center gap-1"
+                  >
+                    <HiChevronLeft className="w-3.5 h-3.5" />
+                    <span>Proyek Sebelumnya</span>
+                  </button>
+                  <button
+                    onClick={handleNextProject}
+                    className="px-2.5 sm:px-3 py-1.5 rounded-lg bg-white/5 hover:bg-white/15 text-gray-300 hover:text-white transition-colors text-xs font-medium flex items-center gap-1"
+                  >
+                    <span>Proyek Selanjutnya</span>
+                    <HiChevronRight className="w-3.5 h-3.5" />
+                  </button>
+                  <a
+                    href={`https://wa.me/6285792096854?text=${encodeURIComponent(
+                      `Halo DRYNO, saya tertarik dengan proyek ${selectedProject.title} (${selectedProject.location}). Bisa konsultasi untuk kebutuhan sumur bor kami?`
+                    )}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="px-3 py-1.5 rounded-lg bg-[#25D366] hover:bg-[#20bd5a] text-white transition-all text-xs font-bold flex items-center gap-1.5 shadow-sm ml-1"
+                  >
+                    <FaWhatsapp className="w-3.5 h-3.5" />
+                    <span className="hidden sm:inline">Tanya Proyek Ini</span>
+                  </a>
                 </div>
               </div>
             </div>
-          ))}
+          </div>
         </div>
-      </div>
+      )}
     </section>
   );
 }
+
+
