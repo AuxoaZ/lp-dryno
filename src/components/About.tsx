@@ -208,7 +208,7 @@ export default function About() {
                     <HiSparkles className="w-5 h-5" />
                   </div>
                   <h4 className="text-base font-extrabold text-deep-navy uppercase tracking-wider">
-                    SYSTEMATIC APPROACH
+                    Investigate, Drill, and Install
                   </h4>
                 </div>
                 <p className="text-sm text-gray-600 leading-relaxed mb-6 font-normal">

@@ -15,7 +15,7 @@ export default function WaterTankerCalculator() {
   // Inputs
   const [dailyNeed, setDailyNeed] = useState<number>(1000);
   const [tankCapacity] = useState<number>(5000);
-  const [pricePerTank, setPricePerTank] = useState<number>(450000);
+  const [pricePerTank, setPricePerTank] = useState<number>(250000);
   const [projectionYears, setProjectionYears] = useState<5 | 10 | 25>(10);
 
   // Calculations
@@ -87,8 +87,8 @@ export default function WaterTankerCalculator() {
             commercial water tanker deliveries. Adjust your daily water demand
             (liters), price per 5,000-liter tanker, and projection horizon (5,
             10, or 25 years). Results show monthly volume, equivalent tanker
-            truckloads, estimated monthly/annual costs, and cumulative multi-year
-            projections.
+            truckloads, estimated monthly/annual costs, and cumulative
+            multi-year projections.
           </p>
         </div>
 
@@ -205,11 +205,12 @@ export default function WaterTankerCalculator() {
                 <label className="text-xs font-bold uppercase tracking-wider text-gray-600 block">
                   Price per Tanker (5,000 L)
                 </label>
-                <div className="flex items-center gap-1.5 p-2.5 rounded-xl bg-gray-50 border border-gray-200 focus-within:border-engineering-blue focus-within:bg-white transition-colors">
+                <div className="flex items-center gap-1.5 p-2.5 rounded-xl bg-gray-50 border border-gray-200">
                   <span className="text-xs font-bold text-gray-400 pl-1">
                     IDR
                   </span>
                   <input
+                    disabled
                     type="number"
                     min="100000"
                     max="2000000"
@@ -218,7 +219,7 @@ export default function WaterTankerCalculator() {
                     onChange={(e) =>
                       setPricePerTank(Math.max(0, Number(e.target.value)))
                     }
-                    className="w-full bg-transparent text-right text-xs font-extrabold text-deep-navy focus:outline-none pr-1"
+                    className="w-full bg-transparent text-right text-xs font-extrabold text-gray-500 cursor-not-allowed focus:outline-none pr-1"
                   />
                 </div>
               </div>
