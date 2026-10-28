@@ -15,6 +15,8 @@ import {
   HiChatBubbleBottomCenterText,
   HiSparkles,
 } from "react-icons/hi2";
+import { useLanguage } from "@/context/LanguageContext";
+import { translations } from "@/context/translations";
 
 interface ServiceItem {
   id: string;
@@ -37,6 +39,8 @@ export default function Services() {
   const [selectedService, setSelectedService] = useState<ServiceItem | null>(
     null,
   );
+  const { language } = useLanguage();
+  const t = translations[language].services;
 
   // Disable body scroll when modal is open
   useEffect(() => {
@@ -50,113 +54,109 @@ export default function Services() {
     };
   }, [selectedService]);
 
-  const services: ServiceItem[] = [
+  const servicesConfig = [
     {
       id: "investigation",
       number: "01",
-      title: "Ground Water Investigation",
-      priceText: "Starting from",
+      priceText: t.startingFrom,
       priceHighlight: "IDR 12,000,000",
       image: "/images/service-1.jpg",
       icon: HiChartBar,
-      shortDesc:
-        "Geoelectric & subsurface investigation to assess ground water zones before drilling.",
-      fullDesc:
-        "Ground Water investigation using geoelectric and ground water detection equipment to assess subsurface conditions and identify potential ground water zones before drilling. The investigation provides technical information to support drilling-point selection and planning of the next project stage.",
-      includes: [
-        "Site assessment",
-        "Geoelectric / ground water investigation",
-        "Ground Water potential assessment",
-        "Interpretation of investigation results",
-        "Recommended drilling point",
-        "Preliminary depth indication",
-        "Technical consultation",
-      ],
-      note: "Final price depends on project location, number of investigation points, site conditions, scope, and project requirements.",
-      disclaimer:
-        "Do not claim or guarantee exact ground water depth or ground water availability.",
+      includes:
+        language === "EN"
+          ? [
+              "Site assessment",
+              "Geoelectric / ground water investigation",
+              "Ground Water potential assessment",
+              "Interpretation of investigation results",
+              "Recommended drilling point",
+              "Preliminary depth indication",
+              "Technical consultation",
+            ]
+          : [
+              "Survei lokasi lapangan",
+              "Investigasi geolistrik air tanah",
+              "Penilaian potensi akuifer air",
+              "Interpretasi data hasil investigasi",
+              "Rekomendasi titik bor optimal",
+              "Indikasi estimasi kedalaman",
+              "Konsultasi teknis awal",
+            ],
     },
     {
       id: "drilling",
       number: "02",
-      title: "Deep Well Drilling",
-      priceText: "Price",
-      priceHighlight: "Request Quotation",
+      priceText: t.priceLabel,
+      priceHighlight: t.requestQuotation,
       image: "/images/service-2.jpg",
       icon: HiWrenchScrewdriver,
-      shortDesc:
-        "Professional deep well drilling tailored to geological conditions and project needs.",
-      fullDesc:
-        "Professional deep well drilling according to project requirements, available investigation data, geological conditions, and actual field conditions. The drilling method, equipment, diameter, and target depth are determined according to the requirements and conditions of each project.",
-      disclaimer:
-        "Do not advertise a universal drilling depth or guarantee ground water availability.",
     },
     {
       id: "casing",
       number: "03",
-      title: "Well Installation & Casing",
-      priceText: "Price",
-      priceHighlight: "Request Quotation",
+      priceText: t.priceLabel,
+      priceHighlight: t.requestQuotation,
       image: "/images/service-3.jpg",
       icon: HiSparkles,
-      shortDesc:
-        "Installation of high-grade casing and well components for long-term structural integrity.",
-      fullDesc:
-        "Installation of well casing and related well components according to drilling conditions and project requirements. The final configuration is determined according to actual technical requirements.",
       casingTypes: ["6 inch casing", "5 inch casing", "4 inch casing"],
     },
     {
       id: "consultation",
       number: "04",
-      title: "Technical Consultation",
-      priceText: "Price",
-      priceHighlight: "Contact Us",
+      priceText: t.priceLabel,
+      priceHighlight: t.contactUs,
       image: "/images/service-4.jpg",
       icon: HiChatBubbleBottomCenterText,
-      shortDesc:
-        "Expert technical guidance and strategic project planning for ground water solutions.",
-      fullDesc:
-        "Technical consultation for projects requiring ground water solutions. Our experienced hydrogeological team provides end-to-end guidance for private, commercial, and industrial developments.",
-      consultationTopics: [
-        "Initial project assessment",
-        "Water requirement discussion",
-        "Site-condition assessment",
-        "Ground Water investigation strategy",
-        "Drilling strategy",
-        "Technical recommendation",
-        "Project planning",
-      ],
+      consultationTopics:
+        language === "EN"
+          ? [
+              "Initial project assessment",
+              "Water requirement discussion",
+              "Site-condition assessment",
+              "Ground Water investigation strategy",
+              "Drilling strategy",
+              "Technical recommendation",
+              "Project planning",
+            ]
+          : [
+              "Penilaian awal proyek",
+              "Analisis kebutuhan debit air",
+              "Evaluasi kondisi geologi tapak",
+              "Strategi investigasi geolistrik",
+              "Perencanaan metode pemboran",
+              "Rekomendasi teknis komprehensif",
+              "Perencanaan jadwal & anggaran",
+            ],
     },
     {
       id: "sipa",
       number: "05",
-      title: "SIPA Processing Assistance",
-      priceText: "Starting from",
+      priceText: t.startingFrom,
       priceHighlight: "IDR 50,000,000",
       image: "/images/service-5.jpg",
       icon: HiDocumentCheck,
-      shortDesc:
-        "Legal administrative assistance for Surat Izin Pengusahaan Air Tanah (SIPA).",
-      fullDesc:
-        "DRYNO provides assistance for the processing of SIPA (Surat Izin Pengusahaan Air Tanah) for projects requiring ground water utilization permits. Our service supports clients throughout the required administrative process, including document preparation and coordination according to applicable requirements and regulations.",
-      note: "Final pricing depends on project location, document readiness, scope of work, technical requirements, and applicable regulatory requirements.",
-      disclaimer: "Does not guarantee permit approval.",
     },
     {
       id: "npwpd",
       number: "06",
-      title: "NPWPD ABT Processing",
-      priceText: "Starting from",
+      priceText: t.startingFrom,
       priceHighlight: "IDR 6,000,000",
       image: "/images/service-6.jpg",
       icon: HiDocumentText,
-      shortDesc:
-        "Registration & administrative support for NPWPD ABT ground water taxation compliance.",
-      fullDesc:
-        "DRYNO provides administrative assistance for the registration and processing of NPWPD ABT (Nomor Pokok Wajib Pajak Daerah Air Bawah Tanah) related to ground water taxation and administrative compliance. Our team assists clients throughout the required administrative process based on applicable requirements and document readiness.",
-      note: "Final pricing may vary depending on project location, document readiness, administrative requirements, and scope of assistance.",
     },
   ];
+
+  const services: ServiceItem[] = servicesConfig.map((cfg, idx) => {
+    const item = t.items[idx] || t.items[0];
+    return {
+      ...cfg,
+      title: item.title,
+      shortDesc: item.shortDesc,
+      fullDesc: item.fullDesc,
+      note: item.note,
+      disclaimer: item.disclaimer,
+    };
+  });
 
   return (
     <section
@@ -167,15 +167,13 @@ export default function Services() {
         {/* Section Header */}
         <div className="max-w-3xl mb-8 sm:mb-14">
           <span className="text-xs font-bold tracking-[0.25em] text-gray-400 uppercase block mb-3">
-            OUR SERVICES
+            {t.eyebrow}
           </span>
           <h2 className="text-2.5xl sm:text-4xl lg:text-5xl font-extrabold text-deep-navy leading-tight tracking-tight mb-3 sm:mb-4">
-            Comprehensive Ground Water & Permitting Solutions
+            {t.title}
           </h2>
           <p className="text-sm sm:text-base text-gray-600 font-normal">
-            Integrated services from initial geoelectric investigation and
-            precision deep well drilling to legal SIPA permitting and NPWPD ABT
-            tax registration.
+            {t.subtitle}
           </p>
         </div>
 
@@ -309,7 +307,7 @@ export default function Services() {
               {/* Detailed Text Description */}
               <div>
                 <h4 className="text-xs font-extrabold text-gray-400 uppercase tracking-widest mb-2">
-                  OVERVIEW & SCOPE
+                  {t.modalScope}
                 </h4>
                 <p className="text-sm sm:text-base text-gray-700 leading-relaxed font-normal">
                   {selectedService.fullDesc}
@@ -320,7 +318,7 @@ export default function Services() {
               {selectedService.includes && (
                 <div>
                   <h4 className="text-xs font-extrabold text-gray-400 uppercase tracking-widest mb-3">
-                    SERVICE MAY INCLUDE:
+                    {language === "EN" ? "SERVICE MAY INCLUDE:" : "CAKUPAN LAYANAN:"}
                   </h4>
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
                     {selectedService.includes.map((item, idx) => (
@@ -340,7 +338,7 @@ export default function Services() {
               {selectedService.casingTypes && (
                 <div>
                   <h4 className="text-xs font-extrabold text-gray-400 uppercase tracking-widest mb-3">
-                    AVAILABLE CASING OPTIONS:
+                    {t.modalCasing}:
                   </h4>
                   <div className="flex flex-wrap gap-2">
                     {selectedService.casingTypes.map((casing, idx) => (
@@ -359,7 +357,7 @@ export default function Services() {
               {selectedService.consultationTopics && (
                 <div>
                   <h4 className="text-xs font-extrabold text-gray-400 uppercase tracking-widest mb-3">
-                    CONSULTATION TOPICS INCLUDE:
+                    {t.modalConsultation}:
                   </h4>
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
                     {selectedService.consultationTopics.map((topic, idx) => (
@@ -398,7 +396,7 @@ export default function Services() {
                 onClick={() => setSelectedService(null)}
                 className="px-5 py-2.5 rounded-full border border-gray-300 text-xs font-bold text-gray-600 hover:bg-gray-100 transition-colors uppercase"
               >
-                CLOSE
+                {language === "EN" ? "CLOSE" : "TUTUP"}
               </button>
 
               <a
@@ -406,7 +404,7 @@ export default function Services() {
                 onClick={() => setSelectedService(null)}
                 className="inline-flex items-center gap-3 px-6 py-2.5 rounded-full bg-deep-navy text-white text-xs font-bold tracking-wider uppercase transition-all duration-300 hover:bg-engineering-blue hover:shadow-lg active:scale-95"
               >
-                <span>INQUIRE ABOUT THIS SERVICE</span>
+                <span>{t.modalCta}</span>
                 <HiArrowRight className="w-3.5 h-3.5" />
               </a>
             </div>

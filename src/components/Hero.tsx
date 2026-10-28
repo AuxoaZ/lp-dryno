@@ -3,9 +3,13 @@
 import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import { HiArrowRight, HiMapPin, HiChevronRight } from "react-icons/hi2";
+import { useLanguage } from "@/context/LanguageContext";
+import { translations } from "@/context/translations";
 
 export default function Hero() {
   const [activeSlide, setActiveSlide] = useState(0);
+  const { language } = useLanguage();
+  const t = translations[language].hero;
 
   const heroImages = [
     {
@@ -71,20 +75,18 @@ export default function Hero() {
           <div className="flex items-center text-center md:text-start gap-2.5 mb-3 sm:mb-6">
             <span className="w-6 sm:w-8 h-[2px] bg-engineering-blue-light" />
             <span className="text-[11px] sm:text-sm font-semibold tracking-[0.2em] sm:tracking-[0.25em] text-warm-white/90 uppercase text-center md:text-start">
-              Engineering Water Solution
+              {t.tagline}
             </span>
           </div>
 
           {/* Main Headline */}
           <h1 className="text-3xl sm:text-5xl lg:text-6xl font-bold text-warm-white leading-[1.18] sm:leading-[1.15] tracking-tight mb-4 sm:mb-6 drop-shadow-md text-center md:text-start">
-            A Reliable Water Source Starts With The Right Approach
+            {t.headline}
           </h1>
 
           {/* Description Paragraph */}
           <p className="text-sm sm:text-lg text-warm-white/80 leading-relaxed font-light mb-6 sm:mb-10 max-w-xl text-center md:text-start">
-            Ground Water investigation, professional deep well drilling, well
-            construction and ground water compliance support for projects across
-            Bali and surrounding regions.
+            {t.description}
           </p>
 
           {/* Action Buttons */}
@@ -94,7 +96,7 @@ export default function Hero() {
               href="#contact"
               className="inline-flex items-center justify-between sm:justify-start gap-3 px-4 py-2.5 sm:px-7 sm:py-4 rounded-full bg-white text-deep-navy font-bold text-[11px] sm:text-sm tracking-wider uppercase transition-all duration-300 hover:bg-warm-white hover:shadow-2xl hover:scale-105 active:scale-95 group shadow-lg max-w-fit"
             >
-              <span>DISCUSS YOUR PROJECT</span>
+              <span>{t.ctaDiscuss}</span>
               <span className="w-6 h-6 sm:w-8 sm:h-8 rounded-full bg-deep-navy flex items-center justify-center transition-transform duration-300 group-hover:translate-x-1">
                 <HiArrowRight className="w-3 h-3 sm:w-4 sm:h-4 text-white" />
               </span>
@@ -105,7 +107,7 @@ export default function Hero() {
               href="#services"
               className="glass-button inline-flex items-center justify-between sm:justify-start gap-3 px-4 py-2.5 sm:px-7 sm:py-4 rounded-full text-warm-white font-bold text-[11px] sm:text-sm tracking-wider uppercase transition-all duration-300 hover:text-white group max-w-fit"
             >
-              <span>EXPLORE OUR SERVICES</span>
+              <span>{t.ctaServices}</span>
               <span className="w-6 h-6 sm:w-8 sm:h-8 rounded-full border border-white/40 flex items-center justify-center transition-transform duration-300 group-hover:translate-x-1 group-hover:border-white">
                 <HiChevronRight className="w-3 h-3 sm:w-4 sm:h-4 text-warm-white" />
               </span>

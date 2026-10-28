@@ -4,7 +4,7 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import WhatsAppButton from "@/components/WhatsAppButton";
 import WaterTankerCalculator from "@/components/WaterTankerCalculator";
-import { HiArrowLeft } from "react-icons/hi2";
+import CalculatorBreadcrumb from "@/components/CalculatorBreadcrumb";
 
 export const metadata: Metadata = {
   title: "Water Tanker Cost Calculator | DRYNO - Ground Water Solution Bali",
@@ -20,13 +20,7 @@ export default function CalculatorPage() {
       <div className="pt-24 sm:pt-28">
         {/* Navigation Breadcrumb */}
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-4 pb-2">
-          <a
-            href="/"
-            className="inline-flex items-center gap-2 text-xs font-bold text-gray-500 hover:text-deep-navy transition-colors tracking-wider uppercase group"
-          >
-            <HiArrowLeft className="w-4 h-4 transition-transform group-hover:-translate-x-1" />
-            <span>Back to Home Overview</span>
-          </a>
+          <CalculatorBreadcrumb />
         </div>
 
         {/* Dedicated Calculator Component */}

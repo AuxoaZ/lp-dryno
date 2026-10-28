@@ -13,6 +13,8 @@ import {
   HiMagnifyingGlassPlus,
 } from "react-icons/hi2";
 import { FaWhatsapp } from "react-icons/fa";
+import { useLanguage } from "@/context/LanguageContext";
+import { translations } from "@/context/translations";
 
 interface MediaItem {
   type: "image" | "video";
@@ -39,6 +41,8 @@ export default function Projects() {
   const scrollContainerRef = useRef<HTMLDivElement>(null);
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
   const [currentImageIndex, setCurrentImageIndex] = useState<number>(0);
+  const { language } = useLanguage();
+  const t = translations[language].projects;
 
   const projects: Project[] = [
     {
@@ -50,7 +54,7 @@ export default function Projects() {
       finalDepth: "220 m",
       waterEncounter: "±200 m",
       waterDischarge: "10 m³/h",
-      image: "/images/project-maison.jpg",
+      image: "/images/project/maison.png",
       gallery: [
         {
           type: "video",
@@ -74,13 +78,13 @@ export default function Projects() {
           description:
             "Proses pengeboran mencapai 220 m dengan hasil debit air melimpah 10 m³/jam.",
         },
-        {
-          type: "image",
-          src: "/images/project-maison.jpg",
-          title: "Maison Horizon Villa Area",
-          description:
-            "Area proyek villa di Pecatu, Uluwatu yang kini memiliki pasokan air mandiri stabil.",
-        },
+        // {
+        //   type: "image",
+        //   src: "/images/project-maison.jpg",
+        //   title: "Maison Horizon Villa Area",
+        //   description:
+        //     "Area proyek villa di Pecatu, Uluwatu yang kini memiliki pasokan air mandiri stabil.",
+        // },
       ],
     },
     {
@@ -93,7 +97,7 @@ export default function Projects() {
       finalDepth: "170 m",
       waterEncounter: "±150 m",
       waterDischarge: "5 m³/h",
-      image: "/images/project-fira.jpg",
+      image: "/images/project/fira.jpg",
       gallery: [
         {
           type: "video",
@@ -124,13 +128,13 @@ export default function Projects() {
           description:
             "Instalasi pipa casing baja dan konstruksi sumur dengan debit air 5 m³/jam.",
         },
-        {
-          type: "image",
-          src: "/images/project-fira.jpg",
-          title: "Fira Uluwatu Villa Complex",
-          description:
-            "Kompleks villa premium di Bingin Uluwatu dengan sistem air tanah mandiri.",
-        },
+        // {
+        //   type: "image",
+        //   src: "/images/project-fira.jpg",
+        //   title: "Fira Uluwatu Villa Complex",
+        //   description:
+        //     "Kompleks villa premium di Bingin Uluwatu dengan sistem air tanah mandiri.",
+        // },
       ],
     },
     {
@@ -142,7 +146,7 @@ export default function Projects() {
       finalDepth: "105 m",
       waterEncounter: "±90 m",
       waterDischarge: "5 m³/h",
-      image: "/images/project-bebas.jpg",
+      image: "/images/project/bebas vila.jpg",
       gallery: [
         {
           type: "video",
@@ -181,13 +185,13 @@ export default function Projects() {
           description:
             "Sistem kompresor bertekanan tinggi dan mata bor DTH hammer di lokasi proyek.",
         },
-        {
-          type: "image",
-          src: "/images/project-bebas.jpg",
-          title: "Bebas Villa Uluwatu Overview",
-          description:
-            "Kawasan villa eksklusif di Bingin Uluwatu dengan solusi air bersih mandiri.",
-        },
+        // {
+        //   type: "image",
+        //   src: "/images/project-bebas.jpg",
+        //   title: "Bebas Villa Uluwatu Overview",
+        //   description:
+        //     "Kawasan villa eksklusif di Bingin Uluwatu dengan solusi air bersih mandiri.",
+        // },
       ],
     },
   ];
@@ -296,10 +300,10 @@ export default function Projects() {
           {/* Title Area */}
           <div>
             <span className="text-xs font-bold tracking-[0.25em] text-gray-400 uppercase block mb-2">
-              OUR PROJECTS
+              {t.eyebrow}
             </span>
             <h2 className="text-2xl sm:text-3xl lg:text-5xl font-bold text-deep-navy tracking-tight">
-              Selected Projects
+              {t.title}
             </h2>
           </div>
 
@@ -328,7 +332,7 @@ export default function Projects() {
               href="#contact"
               className="inline-flex items-center gap-2 text-xs font-bold text-gray-500 hover:text-engineering-blue tracking-widest uppercase transition-colors"
             >
-              <span>VIEW ALL PROJECTS</span>
+              <span>{t.viewAll}</span>
               <HiArrowRight className="w-3.5 h-3.5" />
             </a>
           </div>
@@ -359,7 +363,7 @@ export default function Projects() {
                 }}
                 role="button"
                 tabIndex={0}
-                aria-label={`Buka galeri & video proyek ${project.title}`}
+                aria-label={`${t.openGalleryText}: ${project.title}`}
                 className="min-w-[300px] sm:min-w-[360px] lg:min-w-[380px] flex-1 snap-start group rounded-2xl bg-warm-white border border-gray-100/80 shadow-xs hover:shadow-2xl hover:border-engineering-blue/40 transition-all duration-300 flex flex-col justify-between overflow-hidden cursor-pointer focus:outline-none focus:ring-2 focus:ring-engineering-blue"
               >
                 {/* Project Image with Photo & Video Badges + Hover Overlay */}
@@ -381,12 +385,12 @@ export default function Projects() {
                   <div className="absolute bottom-3 left-3 flex items-center gap-1.5 z-10">
                     <span className="px-2.5 py-1 rounded-full bg-deep-navy/85 backdrop-blur-xs text-[11px] font-semibold text-white/95 flex items-center gap-1 shadow-sm">
                       <HiPhoto className="w-3.5 h-3.5 text-engineering-blue-light" />
-                      <span>{photoCount} Foto</span>
+                      <span>{photoCount} {t.photosCount}</span>
                     </span>
                     {videoCount > 0 && (
                       <span className="px-2 py-1 rounded-full bg-red-600/90 backdrop-blur-xs text-[10px] font-bold text-white flex items-center gap-1 shadow-sm">
                         <HiVideoCamera className="w-3.5 h-3.5" />
-                        <span>{videoCount} Video</span>
+                        <span>{videoCount} {t.videoCount}</span>
                       </span>
                     )}
                   </div>
@@ -395,7 +399,7 @@ export default function Projects() {
                   <div className="absolute inset-0 bg-deep-navy/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center z-10">
                     <span className="px-3.5 py-1.5 rounded-full bg-white/95 text-deep-navy text-xs font-bold shadow-lg flex items-center gap-1.5 transform translate-y-2 group-hover:translate-y-0 transition-transform duration-300">
                       <HiMagnifyingGlassPlus className="w-4 h-4 text-engineering-blue" />
-                      Lihat Dokumentasi & Video
+                      {t.openGalleryText}
                     </span>
                   </div>
                 </div>
@@ -424,7 +428,7 @@ export default function Projects() {
                           {project.finalDepth}
                         </span>
                         <span className="text-[10px] font-semibold text-gray-400 uppercase tracking-wider block">
-                          Final Depth
+                          {t.finalDepthLabel}
                         </span>
                       </div>
 
@@ -434,7 +438,7 @@ export default function Projects() {
                           {project.waterEncounter}
                         </span>
                         <span className="text-[10px] font-semibold text-gray-400 uppercase tracking-wider block">
-                          Water Encounter
+                          {t.waterEncounterLabel}
                         </span>
                       </div>
 
@@ -444,7 +448,7 @@ export default function Projects() {
                           {project.waterDischarge}
                         </span>
                         <span className="text-[10px] font-semibold text-gray-400 uppercase tracking-wider block">
-                          Water Discharge
+                          {t.dischargeLabel}
                         </span>
                       </div>
                     </div>
@@ -453,7 +457,7 @@ export default function Projects() {
                     <div className="mt-4 pt-3 border-t border-gray-100 flex items-center justify-between text-xs font-bold text-engineering-blue group-hover:text-engineering-blue-hover transition-colors">
                       <span className="flex items-center gap-1.5">
                         <HiPhoto className="w-4 h-4" />
-                        Dokumentasi & Video ({project.gallery.length} Media)
+                        {t.openGalleryText} ({project.gallery.length} Media)
                       </span>
                       <span className="transform group-hover:translate-x-1 transition-transform">
                         →
@@ -482,7 +486,7 @@ export default function Projects() {
               <div className="pr-4">
                 <div className="flex items-center gap-2 mb-1 flex-wrap">
                   <span className="text-[10px] font-bold tracking-widest text-engineering-blue-light uppercase bg-engineering-blue/20 px-2 py-0.5 rounded border border-engineering-blue/30">
-                    DOKUMENTASI PROYEK
+                    {t.eyebrow}
                   </span>
                   <span className="text-xs text-gray-400 hidden sm:inline">•</span>
                   <span className="text-xs text-gray-300 font-medium">
@@ -502,8 +506,8 @@ export default function Projects() {
               <button
                 onClick={closeGallery}
                 className="w-10 h-10 rounded-full bg-white/10 hover:bg-white/20 text-white flex items-center justify-center transition-colors flex-shrink-0"
-                aria-label="Tutup galeri (Esc)"
-                title="Tutup (Esc)"
+                aria-label={`${t.closeModal} (Esc)`}
+                title={`${t.closeModal} (Esc)`}
               >
                 <HiXMark className="w-6 h-6" />
               </button>
@@ -522,7 +526,9 @@ export default function Projects() {
                     autoPlay
                     className="max-h-[38vh] sm:max-h-[46vh] md:max-h-[50vh] w-auto max-w-full rounded-xl shadow-2xl bg-black object-contain focus:outline-none"
                   >
-                    Browser Anda tidak mendukung pemutaran video tag.
+                    {language === "ID"
+                      ? "Browser Anda tidak mendukung pemutaran video tag."
+                      : "Your browser does not support the video tag."}
                   </video>
                 </div>
               ) : (
@@ -542,12 +548,12 @@ export default function Projects() {
                 {currentMedia.type === "video" ? (
                   <span className="flex items-center gap-1 text-red-400 font-bold">
                     <HiVideoCamera className="w-3.5 h-3.5" />
-                    Video
+                    {t.videoCount}
                   </span>
                 ) : (
                   <span className="flex items-center gap-1 text-engineering-blue-light font-bold">
                     <HiPhoto className="w-3.5 h-3.5" />
-                    Foto
+                    {t.photosCount}
                   </span>
                 )}
                 <span className="text-white/80">
@@ -560,14 +566,14 @@ export default function Projects() {
                 <>
                   <button
                     onClick={handlePrevImage}
-                    aria-label="Media sebelumnya"
+                    aria-label={language === "ID" ? "Media sebelumnya" : "Previous media"}
                     className="absolute left-3 sm:left-4 top-1/2 -translate-y-1/2 w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-black/60 hover:bg-black/90 text-white border border-white/15 flex items-center justify-center transition-all duration-200 active:scale-95 backdrop-blur-sm z-20"
                   >
                     <HiChevronLeft className="w-6 h-6" />
                   </button>
                   <button
                     onClick={handleNextImage}
-                    aria-label="Media selanjutnya"
+                    aria-label={language === "ID" ? "Media selanjutnya" : "Next media"}
                     className="absolute right-3 sm:right-4 top-1/2 -translate-y-1/2 w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-black/60 hover:bg-black/90 text-white border border-white/15 flex items-center justify-center transition-all duration-200 active:scale-95 backdrop-blur-sm z-20"
                   >
                     <HiChevronRight className="w-6 h-6" />
@@ -582,12 +588,12 @@ export default function Projects() {
                 {currentMedia.type === "video" ? (
                   <span className="px-2 py-0.5 rounded bg-red-500/20 text-red-400 border border-red-500/30 text-[10px] font-bold uppercase tracking-wider flex items-center gap-1">
                     <HiVideoCamera className="w-3 h-3" />
-                    Video Lapangan
+                    {language === "ID" ? "Video Lapangan" : "Field Video"}
                   </span>
                 ) : (
                   <span className="px-2 py-0.5 rounded bg-engineering-blue/20 text-engineering-blue-light border border-engineering-blue/30 text-[10px] font-bold uppercase tracking-wider flex items-center gap-1">
                     <HiPhoto className="w-3 h-3" />
-                    Foto Dokumentasi
+                    {language === "ID" ? "Foto Dokumentasi" : "Site Photo"}
                   </span>
                 )}
                 <h4 className="text-sm sm:text-base font-bold text-white leading-snug line-clamp-1">
@@ -609,12 +615,11 @@ export default function Projects() {
                   <button
                     key={idx}
                     onClick={() => setCurrentImageIndex(idx)}
-                    aria-label={`Pilih ${media.type === "video" ? "video" : "foto"} ${media.title}`}
-                    className={`relative flex-shrink-0 w-16 h-12 sm:w-20 sm:h-14 rounded-lg overflow-hidden transition-all duration-200 ${
-                      currentImageIndex === idx
-                        ? "ring-2 ring-engineering-blue-light ring-offset-2 ring-offset-deep-navy opacity-100 scale-105"
-                        : "opacity-50 hover:opacity-85"
-                    }`}
+                    aria-label={`Media ${idx + 1}: ${media.title}`}
+                    className={`relative flex-shrink-0 w-16 h-12 sm:w-20 sm:h-14 rounded-lg overflow-hidden transition-all duration-200 ${currentImageIndex === idx
+                      ? "ring-2 ring-engineering-blue-light ring-offset-2 ring-offset-deep-navy opacity-100 scale-105"
+                      : "opacity-50 hover:opacity-85"
+                      }`}
                   >
                     <Image
                       src={media.poster || media.src}
@@ -640,7 +645,7 @@ export default function Projects() {
                 <div className="flex items-center gap-4 sm:gap-6 text-gray-300">
                   <div>
                     <span className="text-[10px] text-gray-400 block uppercase font-medium">
-                      Kedalaman
+                      {t.finalDepthLabel}
                     </span>
                     <span className="font-bold text-white">
                       {selectedProject.finalDepth}
@@ -649,7 +654,7 @@ export default function Projects() {
                   <div className="w-px h-6 bg-white/10" />
                   <div>
                     <span className="text-[10px] text-gray-400 block uppercase font-medium">
-                      Temuan Air
+                      {t.waterEncounterLabel}
                     </span>
                     <span className="font-bold text-white">
                       {selectedProject.waterEncounter}
@@ -658,7 +663,7 @@ export default function Projects() {
                   <div className="w-px h-6 bg-white/10" />
                   <div>
                     <span className="text-[10px] text-gray-400 block uppercase font-medium">
-                      Debit Air
+                      {t.dischargeLabel}
                     </span>
                     <span className="font-bold text-white">
                       {selectedProject.waterDischarge}
@@ -673,25 +678,29 @@ export default function Projects() {
                     className="px-2.5 sm:px-3 py-1.5 rounded-lg bg-white/5 hover:bg-white/15 text-gray-300 hover:text-white transition-colors text-xs font-medium flex items-center gap-1"
                   >
                     <HiChevronLeft className="w-3.5 h-3.5" />
-                    <span>Proyek Sebelumnya</span>
+                    <span>{language === "ID" ? "Proyek Sebelumnya" : "Previous Project"}</span>
                   </button>
                   <button
                     onClick={handleNextProject}
                     className="px-2.5 sm:px-3 py-1.5 rounded-lg bg-white/5 hover:bg-white/15 text-gray-300 hover:text-white transition-colors text-xs font-medium flex items-center gap-1"
                   >
-                    <span>Proyek Selanjutnya</span>
+                    <span>{language === "ID" ? "Proyek Selanjutnya" : "Next Project"}</span>
                     <HiChevronRight className="w-3.5 h-3.5" />
                   </button>
                   <a
                     href={`https://wa.me/6285792096854?text=${encodeURIComponent(
-                      `Halo DRYNO, saya tertarik dengan proyek ${selectedProject.title} (${selectedProject.location}). Bisa konsultasi untuk kebutuhan sumur bor kami?`
+                      language === "ID"
+                        ? `Halo DRYNO, saya tertarik dengan proyek ${selectedProject.title} (${selectedProject.location}). Bisa konsultasi untuk kebutuhan sumur bor kami?`
+                        : `Hello DRYNO, I am interested in the ${selectedProject.title} (${selectedProject.location}) project. Can we consult regarding our deep well requirements?`
                     )}`}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="px-3 py-1.5 rounded-lg bg-[#25D366] hover:bg-[#20bd5a] text-white transition-all text-xs font-bold flex items-center gap-1.5 shadow-sm ml-1"
                   >
                     <FaWhatsapp className="w-3.5 h-3.5" />
-                    <span className="hidden sm:inline">Tanya Proyek Ini</span>
+                    <span className="hidden sm:inline">
+                      {language === "ID" ? "Tanya Proyek Ini" : "Inquire Project"}
+                    </span>
                   </a>
                 </div>
               </div>

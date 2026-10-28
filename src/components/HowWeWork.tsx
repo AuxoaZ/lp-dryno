@@ -10,51 +10,26 @@ import {
   HiShieldCheck,
   HiArrowRight,
 } from "react-icons/hi2";
+import { useLanguage } from "@/context/LanguageContext";
+import { translations } from "@/context/translations";
+
+const stepIcons = [
+  HiUserGroup,
+  HiSparkles,
+  HiDocumentChartBar,
+  HiCog6Tooth,
+  HiWrenchScrewdriver,
+  HiShieldCheck,
+];
 
 export default function HowWeWork() {
-  const steps = [
-    {
-      number: "01",
-      title: "Understand",
-      desc: "Understand the project's requirements and site conditions.",
-      icon: HiUserGroup,
-    },
-    {
-      number: "02",
-      title: "Investigate",
-      desc: "Conduct ground water investigation when required.",
-      icon: HiSparkles,
-    },
-    {
-      number: "03",
-      title: "Assess",
-      desc: "Analyze data and actual site conditions.",
-      icon: HiDocumentChartBar,
-    },
-    {
-      number: "04",
-      title: "Define",
-      desc: "Determine an appropriate technical approach.",
-      icon: HiCog6Tooth,
-    },
-    {
-      number: "05",
-      title: "Drill & Install",
-      desc: "Execute deep well drilling and well installation.",
-      icon: HiWrenchScrewdriver,
-    },
-    {
-      number: "06",
-      title: "Comply",
-      desc: "Assist with SIPA and NPWPD ABT processes when required.",
-      icon: HiShieldCheck,
-    },
-  ];
+  const { language } = useLanguage();
+  const t = translations[language].howWeWork;
 
   return (
     <section
       id="how-we-work"
-      className="relative py-5 sm:py-16  bg-deep-navy text-white overflow-hidden"
+      className="relative py-5 sm:py-16 bg-deep-navy text-white overflow-hidden"
     >
       {/* Subtle Background Glows */}
       <div className="absolute top-1/2 left-1/4 -translate-y-1/2 w-96 h-96 bg-engineering-blue/15 rounded-full blur-3xl pointer-events-none" />
@@ -65,22 +40,22 @@ export default function HowWeWork() {
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-8 sm:mb-14 pb-4 sm:pb-6 border-b border-white/10 gap-2">
           <div>
             <span className="text-xs font-bold tracking-[0.25em] text-engineering-blue-light uppercase block mb-2">
-              OUR PROCESS
+              {t.eyebrow}
             </span>
             <h2 className="text-2.5xl sm:text-4xl lg:text-5xl font-bold text-white tracking-tight">
-              How We Work
+              {t.title}
             </h2>
           </div>
           <p className="text-sm sm:text-base text-gray-300 font-light max-w-md">
-            From understanding your project to operational compliance.
+            {t.subtitle}
           </p>
         </div>
 
-        {/* 6-Step Workflow (Matching Reference Screenshot) */}
+        {/* 6-Step Workflow */}
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-6 gap-6 lg:gap-4 items-start">
-          {steps.map((step, idx) => {
-            const Icon = step.icon;
-            const isLast = idx === steps.length - 1;
+          {t.steps.map((step, idx) => {
+            const Icon = stepIcons[idx] || HiUserGroup;
+            const isLast = idx === t.steps.length - 1;
 
             return (
               <div key={step.number} className="relative flex flex-col group">

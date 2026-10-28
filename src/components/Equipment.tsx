@@ -3,28 +3,33 @@
 import React from "react";
 import Image from "next/image";
 import { HiArrowRight } from "react-icons/hi2";
+import { useLanguage } from "@/context/LanguageContext";
+import { translations } from "@/context/translations";
 
 export default function Equipment() {
+  const { language } = useLanguage();
+  const t = translations[language].equipment;
+
   const equipmentList = [
     {
       id: "admt",
       category: "Ground Water Investigation",
-      title: "Geoelectric Equipment",
+      title: language === "EN" ? "Geoelectric Equipment" : "Instrumen Geolistrik",
       spec: "ADMT HT3 & Aerox",
       image: "/images/eq-1.jpg",
     },
     {
       id: "drilling-rig",
       category: "Drilling Equipment",
-      title: "Heavy-Duty Drilling Rig",
-      spec: "Heavy-Duty Drilling Rig",
+      title: language === "EN" ? "Heavy-Duty Drilling Rig" : "Rig Bor Heavy-Duty",
+      spec: language === "EN" ? "Heavy-Duty Drilling Rig" : "Mesin Bor Sumur Dalam",
       image: "/images/eq-2.jpg",
     },
     {
       id: "compressor",
       category: "Supporting Equipment",
-      title: "High-Pressure Compressor",
-      spec: "High-Pressure Compressor",
+      title: language === "EN" ? "High-Pressure Compressor" : "Kompresor Tekanan Tinggi",
+      spec: language === "EN" ? "High-Pressure Compressor" : "Kompresor Udara Bertekanan",
       image: "/images/eq-3.jpg",
     },
     {
@@ -61,14 +66,14 @@ export default function Equipment() {
           <div className="lg:col-span-4 flex flex-col justify-between space-y-4 sm:space-y-6">
             <div>
               <span className="text-xs font-bold tracking-[0.25em] text-engineering-blue-light uppercase block mb-2 sm:mb-3">
-                EQUIPMENT & CAPABILITY
+                {t.eyebrow}
               </span>
               <h2 className="text-2.5xl sm:text-4xl lg:text-5xl font-bold text-white leading-tight tracking-tight mb-3 sm:mb-4">
-                Our Equipment <br />& Capability
+                {t.titleLine1} <br />
+                {t.titleLine2}
               </h2>
               <p className="text-sm sm:text-base text-gray-300 font-light leading-relaxed max-w-md">
-                Equipped with professional equipment and supported by an
-                experienced team to deliver reliable ground water solutions.
+                {t.desc}
               </p>
             </div>
 
@@ -77,7 +82,7 @@ export default function Equipment() {
                 href="#contact"
                 className="glass-button inline-flex items-center gap-4 px-7 py-3.5 rounded-full text-white text-xs font-bold tracking-wider uppercase transition-all duration-300 hover:bg-white hover:text-deep-navy group shadow-lg"
               >
-                <span>VIEW EQUIPMENT</span>
+                <span>{t.cta}</span>
                 <span className="w-6 h-6 rounded-full bg-white/20 flex items-center justify-center transition-transform duration-300 group-hover:translate-x-1 group-hover:bg-deep-navy/10">
                   <HiArrowRight className="w-3.5 h-3.5" />
                 </span>

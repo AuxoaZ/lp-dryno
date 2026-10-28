@@ -25,6 +25,8 @@ export const metadata: Metadata = {
   ],
 };
 
+import { LanguageProvider } from "@/context/LanguageContext";
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -40,7 +42,7 @@ export default function RootLayout({
         suppressHydrationWarning
         className="min-h-screen bg-warm-white text-charcoal flex flex-col"
       >
-        {children}
+        <LanguageProvider>{children}</LanguageProvider>
       </body>
     </html>
   );
