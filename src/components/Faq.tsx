@@ -7,12 +7,11 @@ import {
   HiChatBubbleLeftEllipsis,
 } from "react-icons/hi2";
 import { useLanguage } from "@/context/LanguageContext";
-import { translations } from "@/context/translations";
 
 export default function Faq() {
   const [openIndex, setOpenIndex] = useState<number | null>(0);
-  const { language } = useLanguage();
-  const t = translations[language].faq;
+  const { language, content } = useLanguage();
+  const faq = content.faq;
 
   const toggleFaq = (index: number) => {
     setOpenIndex(openIndex === index ? null : index);
@@ -30,21 +29,13 @@ export default function Faq() {
           <div className="lg:col-span-5 space-y-6 lg:sticky lg:top-28">
             <div>
               <span className="text-xs font-bold tracking-[0.25em] text-gray-400 uppercase block mb-3">
-                {t.eyebrow}
+                {faq.eyebrow[language]}
               </span>
               <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-deep-navy tracking-tight leading-tight mb-4">
-                {language === "EN" ? (
-                  <>
-                    Got Questions? <br /> We Have Answers
-                  </>
-                ) : (
-                  <>
-                    Punya Pertanyaan? <br /> Kami Punya Jawabannya
-                  </>
-                )}
+                {faq.title[language]}
               </h2>
               <p className="text-sm sm:text-base text-gray-600 font-normal leading-relaxed">
-                {t.subtitle}
+                {faq.subtitle[language]}
               </p>
             </div>
 
@@ -72,18 +63,18 @@ export default function Faq() {
                 href="#contact"
                 className="w-1/2 inline-flex items-center justify-center gap-2 px-5 py-3 rounded-full bg-white text-deep-navy text-xs font-bold tracking-wider uppercase transition-all duration-300 hover:bg-warm-white hover:scale-[1.02] active:scale-95 shadow-md"
               >
-                <span>{t.ctaButton}</span>
+                <span>{faq.ctaButton[language]}</span>
               </a>
             </div>
           </div>
 
           {/* Column 2: Right FAQ Accordion List (lg:col-span-7) */}
           <div className="lg:col-span-7 space-y-4">
-            {t.items.map((faq, index) => {
+            {faq.items.map((item, index) => {
               const isOpen = openIndex === index;
               return (
                 <div
-                  key={index}
+                  key={item.id || index}
                   className={`rounded-2xl border transition-all duration-300 overflow-hidden ${
                     isOpen
                       ? "bg-white border-engineering-blue/30 shadow-md"
@@ -95,7 +86,7 @@ export default function Faq() {
                     className="w-full px-6 py-5 flex items-center justify-between text-left focus:outline-none gap-4"
                   >
                     <span className="text-base font-bold text-deep-navy leading-snug">
-                      {faq.question}
+                      {item.question[language]}
                     </span>
                     <div
                       className={`w-8 h-8 rounded-full flex items-center justify-center shrink-0 transition-colors duration-300 ${
@@ -114,7 +105,7 @@ export default function Faq() {
 
                   {isOpen && (
                     <div className="px-6 pb-6 pt-1 text-sm text-gray-600 leading-relaxed font-normal border-t border-gray-100/60 animate-fadeIn">
-                      {faq.answer}
+                      {item.answer[language]}
                     </div>
                   )}
                 </div>

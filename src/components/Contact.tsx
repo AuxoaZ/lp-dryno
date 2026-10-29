@@ -13,14 +13,16 @@ import { useLanguage } from "@/context/LanguageContext";
 import { translations } from "@/context/translations";
 
 export default function Contact() {
-  const { language } = useLanguage();
+  const { language, content } = useLanguage();
   const t = translations[language].contact;
+  const contact = content.contact;
 
   const [formData, setFormData] = useState({
     name: "",
     company: "",
     location: "",
-    projectType: language === "EN" ? "Villa / Private Estate" : "Vila / Hunian Pribadi",
+    projectType:
+      language === "EN" ? "Villa / Private Estate" : "Vila / Hunian Pribadi",
     message: "",
   });
 
@@ -28,7 +30,6 @@ export default function Contact() {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    // Simulate form submission
     setSubmitted(true);
   };
 
@@ -57,7 +58,7 @@ export default function Contact() {
       className="relative py-12 sm:py-20 lg:py-24 bg-white text-deep-navy overflow-hidden"
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Navy Card Container (White Section, Navy Card) */}
+        {/* Navy Card Container */}
         <div className="relative rounded-3xl bg-gradient-to-br from-deep-navy via-deep-navy-dark to-charcoal text-white p-6 sm:p-12 lg:p-16 shadow-2xl overflow-hidden">
           {/* Decorative Glowing Orbs */}
           <div className="absolute top-0 right-0 w-96 h-96 bg-engineering-blue/20 rounded-full blur-3xl pointer-events-none" />
@@ -71,17 +72,17 @@ export default function Contact() {
                 <div className="flex items-center gap-2 mb-3 sm:mb-4">
                   <span className="w-6 sm:w-8 h-[2px] bg-engineering-blue-light" />
                   <span className="text-xs font-bold tracking-[0.25em] text-engineering-blue-light uppercase">
-                    {t.eyebrow}
+                    {contact.eyebrow[language]}
                   </span>
                 </div>
 
                 {/* Main CTA Heading */}
                 <h2 className="text-2.5xl sm:text-4xl lg:text-5xl font-black text-white leading-tight uppercase tracking-tight mb-4 sm:mb-6">
-                  {t.title}
+                  {contact.title[language]}
                 </h2>
 
                 <p className="text-sm sm:text-base text-gray-300 font-light leading-relaxed">
-                  {t.desc}
+                  {contact.desc[language]}
                 </p>
               </div>
 
@@ -96,7 +97,7 @@ export default function Contact() {
                       OPERATIONAL COVERAGE
                     </h4>
                     <p className="text-sm font-semibold text-white">
-                      Bali • Nusa Lembongan • Nusa Penida • NTB
+                      {contact.coverage}
                     </p>
                   </div>
                 </div>
@@ -110,7 +111,7 @@ export default function Contact() {
                       DIRECT WHATSAPP & PHONE
                     </h4>
                     <p className="text-sm font-semibold text-white">
-                      +62 857-9209-6854
+                      {contact.phoneDisplay}
                     </p>
                   </div>
                 </div>
@@ -124,7 +125,7 @@ export default function Contact() {
                       EMAIL INQUIRIES
                     </h4>
                     <p className="text-sm font-semibold text-white">
-                      info@dryno.co.id
+                      {contact.email}
                     </p>
                   </div>
                 </div>
@@ -134,10 +135,7 @@ export default function Contact() {
               <div className="p-4 rounded-2xl bg-white/5 border border-white/10 flex items-center gap-3">
                 <HiSparkles className="w-5 h-5 text-engineering-blue-light shrink-0" />
                 <p className="text-xs text-gray-300">
-                  <strong className="text-white">
-                    10+ Years Field Experience
-                  </strong>{" "}
-                  in hydrogeology, drilling & regulatory compliance.
+                  {contact.experienceHighlight[language]}
                 </p>
               </div>
             </div>

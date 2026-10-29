@@ -11,13 +11,12 @@ import {
   HiMegaphone,
 } from "react-icons/hi2";
 import { useLanguage } from "@/context/LanguageContext";
-import { translations } from "@/context/translations";
 
 const articleIcons = [HiNewspaper, HiAcademicCap, HiMegaphone];
 
 export default function WaterChallenges() {
-  const { language } = useLanguage();
-  const t = translations[language].waterChallenges;
+  const { language, content } = useLanguage();
+  const wc = content.waterChallenges;
 
   return (
     <section
@@ -29,25 +28,25 @@ export default function WaterChallenges() {
       <div className="absolute bottom-0 left-0 -ml-24 -mb-24 w-96 h-96 rounded-full bg-engineering-blue-light/5 blur-3xl pointer-events-none" />
 
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Top Section: Eyebrow, Main Headline, Copy & CTAs (Atas Bawah) */}
+        {/* Top Section: Eyebrow, Main Headline, Copy & CTAs */}
         <div className="max-w-4xl mb-8 sm:mb-12 space-y-5">
           {/* Eyebrow Tag */}
           <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-amber-500/10 border border-amber-500/20 text-amber-700 text-xs font-bold tracking-wider uppercase">
             <HiExclamationCircle className="w-4 h-4 text-amber-600 shrink-0" />
-            <span>{t.eyebrow}</span>
+            <span>{wc.eyebrow[language]}</span>
           </div>
 
           {/* Main Headline */}
           <h2 className="text-2.5xl sm:text-4xl lg:text-5xl font-extrabold text-deep-navy leading-[1.15] tracking-tight">
-            {t.headlinePart1}
+            {wc.headlinePart1[language]}
             <span className="text-engineering-blue block sm:inline">
-              {t.headlinePart2}
+              {wc.headlinePart2[language]}
             </span>
           </h2>
 
           {/* Body Copy */}
           <p className="text-sm sm:text-base lg:text-lg text-gray-700 leading-relaxed font-normal max-w-3xl">
-            {t.description}
+            {wc.description[language]}
           </p>
 
           {/* CTA Buttons */}
@@ -56,7 +55,7 @@ export default function WaterChallenges() {
               href="/calculator"
               className="inline-flex items-center gap-2.5 px-6 py-3 rounded-full bg-deep-navy text-white text-xs font-bold tracking-wider uppercase transition-all duration-300 hover:bg-engineering-blue hover:shadow-lg active:scale-95 group"
             >
-              <span>{t.ctaCalculator}</span>
+              <span>{wc.ctaCalculator[language]}</span>
               <HiArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />
             </a>
 
@@ -64,15 +63,18 @@ export default function WaterChallenges() {
               href="#services"
               className="inline-flex items-center gap-2 px-5 py-3 rounded-full bg-white border border-gray-200 text-deep-navy text-xs font-bold tracking-wider uppercase transition-all duration-300 hover:bg-gray-50 hover:border-gray-300 shadow-2xs"
             >
-              <span>{t.ctaSolutions}</span>
+              <span>{wc.ctaSolutions[language]}</span>
             </a>
           </div>
         </div>
 
-        {/* 1/2 Height Image Showcase (Posisi Bawah Text) */}
+        {/* 1/2 Height Image Showcase */}
         <div className="relative w-full min-h-[450px] rounded-2xl sm:rounded-3xl overflow-hidden shadow-2xl border border-gray-100 group">
           <Image
-            src="https://images.unsplash.com/photo-1535868118629-f37bcd69ff59?q=80&w=1176&auto=format&fit=crop"
+            src={
+              wc.bannerImage ||
+              "https://images.unsplash.com/photo-1535868118629-f37bcd69ff59?q=80&w=1176&auto=format&fit=crop"
+            }
             alt="Water Supply Challenges in Southern Bali and Pecatu"
             fill
             priority
@@ -90,20 +92,20 @@ export default function WaterChallenges() {
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-4 sm:mb-6">
             <div>
               <span className="text-[11px] font-bold tracking-[0.2em] text-engineering-blue uppercase block mb-1">
-                {t.referencesEyebrow}
+                {wc.referencesEyebrow[language]}
               </span>
               <h3 className="text-lg sm:text-xl font-bold text-deep-navy">
-                {t.referencesTitle}
+                {wc.referencesTitle[language]}
               </h3>
             </div>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-5">
-            {t.articles.map((article, index) => {
-              const Icon = articleIcons[index] || HiNewspaper;
+            {wc.articles.map((article, index) => {
+              const Icon = articleIcons[index % articleIcons.length] || HiNewspaper;
               return (
                 <a
-                  key={index}
+                  key={article.id || index}
                   href={article.url}
                   target="_blank"
                   rel="noopener noreferrer"
@@ -115,19 +117,19 @@ export default function WaterChallenges() {
                         className={`inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[11px] font-bold border ${article.badgeColor}`}
                       >
                         <Icon className="w-3.5 h-3.5 shrink-0" />
-                        <span>{article.type}</span>
+                        <span>{article.type[language]}</span>
                       </span>
                       <span className="text-[11px] font-medium text-gray-400">
-                        {article.date}
+                        {article.date[language]}
                       </span>
                     </div>
 
                     <h4 className="text-sm sm:text-base font-bold text-deep-navy group-hover:text-engineering-blue transition-colors leading-snug">
-                      {article.publisher}
+                      {article.publisher[language]}
                     </h4>
 
                     <p className="text-xs sm:text-sm text-gray-600 leading-relaxed font-normal">
-                      {article.description}
+                      {article.description[language]}
                     </p>
                   </div>
 
@@ -136,7 +138,7 @@ export default function WaterChallenges() {
                       {article.domain}
                     </span>
                     <span className="inline-flex items-center gap-1">
-                      <span>{t.readArticle}</span>
+                      <span>{wc.readArticle[language]}</span>
                       <HiArrowTopRightOnSquare className="w-3.5 h-3.5 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
                     </span>
                   </div>

@@ -8,8 +8,9 @@ import { translations } from "@/context/translations";
 
 export default function Footer() {
   const [currentYear, setCurrentYear] = React.useState<number>(2026);
-  const { language } = useLanguage();
+  const { language, content } = useLanguage();
   const t = translations[language];
+  const contact = content.contact;
 
   React.useEffect(() => {
     setCurrentYear(new Date().getFullYear());
@@ -35,7 +36,7 @@ export default function Footer() {
           <div className="lg:col-span-5 space-y-4">
             <Logo variant="light" />
             <p className="text-xs sm:text-sm text-gray-400 font-light max-w-sm leading-relaxed pt-2">
-              {t.footer.brandDesc}
+              {contact.footerBrandDesc[language]}
             </p>
           </div>
 
@@ -65,17 +66,15 @@ export default function Footer() {
             <div className="space-y-2.5 text-xs text-gray-300">
               <div className="flex items-start gap-2.5">
                 <HiMapPin className="w-4 h-4 text-engineering-blue-light shrink-0 mt-0.5" />
-                <span>
-                  Bali • Nusa Lembongan • Nusa Penida • NTB (Lombok & Sumbawa)
-                </span>
+                <span>{contact.coverage}</span>
               </div>
               <div className="flex items-center gap-2.5">
                 <HiPhone className="w-4 h-4 text-engineering-blue-light shrink-0" />
-                <span>+62 857-9209-6854</span>
+                <span>{contact.phoneDisplay}</span>
               </div>
               <div className="flex items-center gap-2.5">
                 <HiEnvelope className="w-4 h-4 text-engineering-blue-light shrink-0" />
-                <span>info@dryno.co.id</span>
+                <span>{contact.email}</span>
               </div>
             </div>
           </div>
@@ -84,16 +83,17 @@ export default function Footer() {
         {/* Bottom Copyright Row */}
         <div className="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs font-medium text-gray-500">
           <p>
-            © {currentYear} DRYNO — Engineering Water Solution. {t.footer.allRightsReserved}{" "}
+            © {currentYear} DRYNO — Engineering Water Solution.{" "}
+            {t.footer.allRightsReserved}{" "}
             <span className="text-gray-500 ml-1">
               {t.footer.collaborationWith}{" "}
               <a
-                href="https://autoneka.id"
+                href={contact.collaborationUrl || "https://autoneka.id"}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-engineering-blue-light font-semibold"
               >
-                autoneka.id
+                {contact.collaborationName || "autoneka.id"}
               </a>
             </span>
           </p>

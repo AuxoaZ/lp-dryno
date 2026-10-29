@@ -15,186 +15,19 @@ import {
 import { FaWhatsapp } from "react-icons/fa";
 import { useLanguage } from "@/context/LanguageContext";
 import { translations } from "@/context/translations";
-
-interface MediaItem {
-  type: "image" | "video";
-  src: string;
-  title: string;
-  description?: string;
-  poster?: string;
-}
-
-interface Project {
-  id: string;
-  title: string;
-  location: string;
-  date: string;
-  scope: string;
-  finalDepth: string;
-  waterEncounter: string;
-  waterDischarge: string;
-  image: string;
-  gallery: MediaItem[];
-}
+import type { ProjectItem, ProjectMediaItem } from "@/types/cms";
 
 export default function Projects() {
   const scrollContainerRef = useRef<HTMLDivElement>(null);
-  const [selectedProject, setSelectedProject] = useState<Project | null>(null);
+  const [selectedProject, setSelectedProject] = useState<ProjectItem | null>(
+    null
+  );
   const [currentImageIndex, setCurrentImageIndex] = useState<number>(0);
-  const { language } = useLanguage();
+  const { language, content } = useLanguage();
   const t = translations[language].projects;
 
-  const projects: Project[] = [
-    {
-      id: "maison-horizon",
-      title: "Maison Horizon Uluwatu",
-      location: "Pecatu, Uluwatu, Bali",
-      date: "Jan 2025",
-      scope: "Ground Water Investigation & Deep Well Drilling",
-      finalDepth: "220 m",
-      waterEncounter: "±200 m",
-      waterDischarge: "10 m³/h",
-      image: "/images/project/maison.png",
-      gallery: [
-        {
-          type: "video",
-          src: "/videos/Maison.mp4",
-          poster: "/images/project/maison1.webp",
-          title: "Video Operasi Pengeboran - Maison Horizon",
-          description:
-            "Dokumentasi video langsung proses pengeboran sumur dalam hingga kedalaman 220 meter di kawasan Pecatu, Uluwatu.",
-        },
-        {
-          type: "image",
-          src: "/images/project/maison1.webp",
-          title: "Ground Water Investigation & Rig Setup",
-          description:
-            "Setup alat investigasi geolistrik dan persiapan titik bor sumur dalam Maison Horizon.",
-        },
-        {
-          type: "image",
-          src: "/images/project/maison2.webp",
-          title: "Deep Drilling & Water Discharge Testing",
-          description:
-            "Proses pengeboran mencapai 220 m dengan hasil debit air melimpah 10 m³/jam.",
-        },
-        // {
-        //   type: "image",
-        //   src: "/images/project-maison.jpg",
-        //   title: "Maison Horizon Villa Area",
-        //   description:
-        //     "Area proyek villa di Pecatu, Uluwatu yang kini memiliki pasokan air mandiri stabil.",
-        // },
-      ],
-    },
-    {
-      id: "fira-uluwatu",
-      title: "Fira Uluwatu",
-      location: "Bingin, Uluwatu, Bali",
-      date: "Mar 2025",
-      scope:
-        "Ground Water Investigation, Deep Well Drilling & Well Installation",
-      finalDepth: "170 m",
-      waterEncounter: "±150 m",
-      waterDischarge: "5 m³/h",
-      image: "/images/project/fira.jpg",
-      gallery: [
-        {
-          type: "video",
-          src: "/videos/Fira Uluwatu Cemongkak.mp4",
-          poster: "/images/project/Fira Uluwatu Cemongkak1.webp",
-          title: "Video Dokumentasi Lapangan - Fira Uluwatu Cemongkak",
-          description:
-            "Rekaman video pengerjaan pengeboran sumur dalam menembus formasi batuan karst kapur di Bingin, Uluwatu.",
-        },
-        {
-          type: "image",
-          src: "/images/project/Fira Uluwatu Cemongkak1.webp",
-          title: "Heavy Rig Mobilization & Site Setup",
-          description:
-            "Mobilisasi heavy rig dan positioning alat di lokasi Cemongkak, Bingin, Uluwatu.",
-        },
-        {
-          type: "image",
-          src: "/images/project/Fira Uluwatu Cemongkak2.webp",
-          title: "Deep Well Drilling Operation",
-          description:
-            "Pengeboran formasi batuan karst kapur keras menembus kedalaman 170 meter.",
-        },
-        {
-          type: "image",
-          src: "/images/project/Fira Uluwatu Cemongkak3.webp",
-          title: "Casing Installation & Well Development",
-          description:
-            "Instalasi pipa casing baja dan konstruksi sumur dengan debit air 5 m³/jam.",
-        },
-        // {
-        //   type: "image",
-        //   src: "/images/project-fira.jpg",
-        //   title: "Fira Uluwatu Villa Complex",
-        //   description:
-        //     "Kompleks villa premium di Bingin Uluwatu dengan sistem air tanah mandiri.",
-        // },
-      ],
-    },
-    {
-      id: "bebas-villa",
-      title: "Bebas Villa Uluwatu",
-      location: "Bingin, Uluwatu, Bali",
-      date: "Apr 2026",
-      scope: "Ground Water Investigation & Deep Well Drilling",
-      finalDepth: "105 m",
-      waterEncounter: "±90 m",
-      waterDischarge: "5 m³/h",
-      image: "/images/project/bebas vila.jpg",
-      gallery: [
-        {
-          type: "video",
-          src: "/videos/Bebas Villa1.mp4",
-          poster: "/images/project/Bebas Villa1.webp",
-          title: "Video Pengeboran Lapangan Bagian 1 - Bebas Villa",
-          description:
-            "Dokumentasi video penetrasi batuan dan instalasi alat pengeboran sumur dalam 105 m di Bingin.",
-        },
-        {
-          type: "video",
-          src: "/videos/Bebas Villa2.mp4",
-          poster: "/images/project/Tool Equipment_result.webp",
-          title: "Video Pengujian & Debit Air Bagian 2 - Bebas Villa",
-          description:
-            "Dokumentasi video semburan air tanah dan pengujian debit 5 m³/jam yang berhasil didapatkan.",
-        },
-        {
-          type: "image",
-          src: "/images/project/Bebas Villa1.webp",
-          title: "Well Drilling in Bingin",
-          description:
-            "Operasi pengeboran sumur dalam 105 m untuk menyuplai air bersih Bebas Villa.",
-        },
-        {
-          type: "image",
-          src: "/images/project/Tool Equipment_result.webp",
-          title: "Heavy-Duty Drilling Rig on Site",
-          description:
-            "Rig hidrolik bertenaga tinggi untuk menembus formasi batuan keras perbukitan Uluwatu.",
-        },
-        {
-          type: "image",
-          src: "/images/project/Tool Equipment 2_result.webp",
-          title: "High-Pressure DTH Hammer System",
-          description:
-            "Sistem kompresor bertekanan tinggi dan mata bor DTH hammer di lokasi proyek.",
-        },
-        // {
-        //   type: "image",
-        //   src: "/images/project-bebas.jpg",
-        //   title: "Bebas Villa Uluwatu Overview",
-        //   description:
-        //     "Kawasan villa eksklusif di Bingin Uluwatu dengan solusi air bersih mandiri.",
-        // },
-      ],
-    },
-  ];
+  const projects: ProjectItem[] = content.projects || [];
+  const whatsappNumber = content.contact?.whatsappNumber || "6285792096854";
 
   const scroll = (direction: "left" | "right") => {
     if (scrollContainerRef.current) {
@@ -206,7 +39,7 @@ export default function Projects() {
     }
   };
 
-  const openGallery = (project: Project, imageIndex: number = 0) => {
+  const openGallery = (project: ProjectItem, imageIndex: number = 0) => {
     setSelectedProject(project);
     setCurrentImageIndex(imageIndex);
   };
@@ -219,7 +52,7 @@ export default function Projects() {
   const handlePrevImage = useCallback(
     (e?: React.MouseEvent) => {
       e?.stopPropagation();
-      if (!selectedProject) return;
+      if (!selectedProject || !selectedProject.gallery?.length) return;
       setCurrentImageIndex((prev) =>
         prev === 0 ? selectedProject.gallery.length - 1 : prev - 1
       );
@@ -230,7 +63,7 @@ export default function Projects() {
   const handleNextImage = useCallback(
     (e?: React.MouseEvent) => {
       e?.stopPropagation();
-      if (!selectedProject) return;
+      if (!selectedProject || !selectedProject.gallery?.length) return;
       setCurrentImageIndex((prev) =>
         prev === selectedProject.gallery.length - 1 ? 0 : prev + 1
       );
@@ -240,10 +73,10 @@ export default function Projects() {
 
   const handlePrevProject = (e?: React.MouseEvent) => {
     e?.stopPropagation();
-    if (!selectedProject) return;
+    if (!selectedProject || projects.length === 0) return;
     const currentIndex = projects.findIndex((p) => p.id === selectedProject.id);
     const prevProject =
-      currentIndex === 0
+      currentIndex <= 0
         ? projects[projects.length - 1]
         : projects[currentIndex - 1];
     setSelectedProject(prevProject);
@@ -252,10 +85,10 @@ export default function Projects() {
 
   const handleNextProject = (e?: React.MouseEvent) => {
     e?.stopPropagation();
-    if (!selectedProject) return;
+    if (!selectedProject || projects.length === 0) return;
     const currentIndex = projects.findIndex((p) => p.id === selectedProject.id);
     const nextProject =
-      currentIndex === projects.length - 1
+      currentIndex >= projects.length - 1
         ? projects[0]
         : projects[currentIndex + 1];
     setSelectedProject(nextProject);
@@ -286,8 +119,16 @@ export default function Projects() {
     };
   }, [selectedProject, closeGallery, handlePrevImage, handleNextImage]);
 
-  const currentMedia: MediaItem | undefined =
-    selectedProject?.gallery[currentImageIndex];
+  const currentMedia: ProjectMediaItem | undefined =
+    selectedProject?.gallery?.[currentImageIndex] ||
+    (selectedProject
+      ? {
+          type: "image",
+          src: selectedProject.image,
+          title: selectedProject.title,
+          description: selectedProject.scope,
+        }
+      : undefined);
 
   return (
     <section
@@ -344,10 +185,11 @@ export default function Projects() {
           className="flex overflow-x-auto gap-6 pb-4 scroll-smooth snap-x snap-mandatory [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden"
         >
           {projects.map((project) => {
-            const photoCount = project.gallery.filter(
+            const galleryList = project.gallery || [];
+            const photoCount = galleryList.filter(
               (m) => m.type === "image"
             ).length;
-            const videoCount = project.gallery.filter(
+            const videoCount = galleryList.filter(
               (m) => m.type === "video"
             ).length;
 
@@ -369,9 +211,13 @@ export default function Projects() {
                 {/* Project Image with Photo & Video Badges + Hover Overlay */}
                 <div className="relative h-48 sm:h-52 w-full overflow-hidden bg-gray-100">
                   <Image
-                    src={project.image}
+                    src={project.image || "/images/project/maison.png"}
                     alt={project.title}
                     fill
+                    unoptimized={
+                      project.image?.startsWith("http") ||
+                      project.image?.startsWith("/images/uploads/")
+                    }
                     sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                     className="object-cover object-center group-hover:scale-105 transition-transform duration-500"
                   />
@@ -385,12 +231,16 @@ export default function Projects() {
                   <div className="absolute bottom-3 left-3 flex items-center gap-1.5 z-10">
                     <span className="px-2.5 py-1 rounded-full bg-deep-navy/85 backdrop-blur-xs text-[11px] font-semibold text-white/95 flex items-center gap-1 shadow-sm">
                       <HiPhoto className="w-3.5 h-3.5 text-engineering-blue-light" />
-                      <span>{photoCount} {t.photosCount}</span>
+                      <span>
+                        {photoCount} {t.photosCount}
+                      </span>
                     </span>
                     {videoCount > 0 && (
                       <span className="px-2 py-1 rounded-full bg-red-600/90 backdrop-blur-xs text-[10px] font-bold text-white flex items-center gap-1 shadow-sm">
                         <HiVideoCamera className="w-3.5 h-3.5" />
-                        <span>{videoCount} {t.videoCount}</span>
+                        <span>
+                          {videoCount} {t.videoCount}
+                        </span>
                       </span>
                     )}
                   </div>
@@ -457,7 +307,7 @@ export default function Projects() {
                     <div className="mt-4 pt-3 border-t border-gray-100 flex items-center justify-between text-xs font-bold text-engineering-blue group-hover:text-engineering-blue-hover transition-colors">
                       <span className="flex items-center gap-1.5">
                         <HiPhoto className="w-4 h-4" />
-                        {t.openGalleryText} ({project.gallery.length} Media)
+                        {t.openGalleryText} ({galleryList.length} Media)
                       </span>
                       <span className="transform group-hover:translate-x-1 transition-transform">
                         →
@@ -488,11 +338,15 @@ export default function Projects() {
                   <span className="text-[10px] font-bold tracking-widest text-engineering-blue-light uppercase bg-engineering-blue/20 px-2 py-0.5 rounded border border-engineering-blue/30">
                     {t.eyebrow}
                   </span>
-                  <span className="text-xs text-gray-400 hidden sm:inline">•</span>
+                  <span className="text-xs text-gray-400 hidden sm:inline">
+                    •
+                  </span>
                   <span className="text-xs text-gray-300 font-medium">
                     {selectedProject.location}
                   </span>
-                  <span className="text-xs text-gray-500 hidden sm:inline">•</span>
+                  <span className="text-xs text-gray-500 hidden sm:inline">
+                    •
+                  </span>
                   <span className="text-xs text-gray-400">
                     {selectedProject.date}
                   </span>
@@ -513,7 +367,7 @@ export default function Projects() {
               </button>
             </div>
 
-            {/* Main Media Display Area (Image or Video) */}
+            {/* Main Media Display Area */}
             <div className="relative w-full h-[42vh] sm:h-[50vh] md:h-[54vh] bg-black/80 flex items-center justify-center select-none overflow-hidden">
               {currentMedia.type === "video" ? (
                 <div className="relative w-full h-full flex items-center justify-center p-2 sm:p-3 bg-black">
@@ -538,6 +392,10 @@ export default function Projects() {
                   alt={currentMedia.title}
                   fill
                   priority
+                  unoptimized={
+                    currentMedia.src?.startsWith("http") ||
+                    currentMedia.src?.startsWith("/images/uploads/")
+                  }
                   sizes="(max-width: 1024px) 100vw, 1100px"
                   className="object-contain"
                 />
@@ -557,23 +415,28 @@ export default function Projects() {
                   </span>
                 )}
                 <span className="text-white/80">
-                  {currentImageIndex + 1} / {selectedProject.gallery.length}
+                  {currentImageIndex + 1} /{" "}
+                  {Math.max(1, selectedProject.gallery?.length || 1)}
                 </span>
               </div>
 
-              {/* Navigation Arrows (if > 1 media item) */}
-              {selectedProject.gallery.length > 1 && (
+              {/* Navigation Arrows */}
+              {selectedProject.gallery?.length > 1 && (
                 <>
                   <button
                     onClick={handlePrevImage}
-                    aria-label={language === "ID" ? "Media sebelumnya" : "Previous media"}
+                    aria-label={
+                      language === "ID" ? "Media sebelumnya" : "Previous media"
+                    }
                     className="absolute left-3 sm:left-4 top-1/2 -translate-y-1/2 w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-black/60 hover:bg-black/90 text-white border border-white/15 flex items-center justify-center transition-all duration-200 active:scale-95 backdrop-blur-sm z-20"
                   >
                     <HiChevronLeft className="w-6 h-6" />
                   </button>
                   <button
                     onClick={handleNextImage}
-                    aria-label={language === "ID" ? "Media selanjutnya" : "Next media"}
+                    aria-label={
+                      language === "ID" ? "Media selanjutnya" : "Next media"
+                    }
                     className="absolute right-3 sm:right-4 top-1/2 -translate-y-1/2 w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-black/60 hover:bg-black/90 text-white border border-white/15 flex items-center justify-center transition-all duration-200 active:scale-95 backdrop-blur-sm z-20"
                   >
                     <HiChevronRight className="w-6 h-6" />
@@ -610,34 +473,43 @@ export default function Projects() {
             {/* Modal Bottom: Thumbnails & Specs Bar */}
             <div className="p-3 sm:p-5 bg-deep-navy border-t border-white/10 flex flex-col gap-3">
               {/* Thumbnails Row */}
-              <div className="flex items-center gap-2 sm:gap-3 overflow-x-auto pb-1 [scrollbar-width:thin]">
-                {selectedProject.gallery.map((media, idx) => (
-                  <button
-                    key={idx}
-                    onClick={() => setCurrentImageIndex(idx)}
-                    aria-label={`Media ${idx + 1}: ${media.title}`}
-                    className={`relative flex-shrink-0 w-16 h-12 sm:w-20 sm:h-14 rounded-lg overflow-hidden transition-all duration-200 ${currentImageIndex === idx
-                      ? "ring-2 ring-engineering-blue-light ring-offset-2 ring-offset-deep-navy opacity-100 scale-105"
-                      : "opacity-50 hover:opacity-85"
+              {selectedProject.gallery?.length > 0 && (
+                <div className="flex items-center gap-2 sm:gap-3 overflow-x-auto pb-1 [scrollbar-width:thin]">
+                  {selectedProject.gallery.map((media, idx) => (
+                    <button
+                      key={idx}
+                      onClick={() => setCurrentImageIndex(idx)}
+                      aria-label={`Media ${idx + 1}: ${media.title}`}
+                      className={`relative flex-shrink-0 w-16 h-12 sm:w-20 sm:h-14 rounded-lg overflow-hidden transition-all duration-200 ${
+                        currentImageIndex === idx
+                          ? "ring-2 ring-engineering-blue-light ring-offset-2 ring-offset-deep-navy opacity-100 scale-105"
+                          : "opacity-50 hover:opacity-85"
                       }`}
-                  >
-                    <Image
-                      src={media.poster || media.src}
-                      alt={media.title}
-                      fill
-                      sizes="80px"
-                      className="object-cover"
-                    />
-                    {media.type === "video" && (
-                      <div className="absolute inset-0 bg-black/40 flex items-center justify-center">
-                        <div className="w-6 h-6 rounded-full bg-red-600/90 text-white flex items-center justify-center shadow-md">
-                          <HiPlay className="w-3.5 h-3.5 translate-x-0.5" />
+                    >
+                      <Image
+                        src={media.poster || media.src}
+                        alt={media.title}
+                        fill
+                        unoptimized={
+                          (media.poster || media.src)?.startsWith("http") ||
+                          (media.poster || media.src)?.startsWith(
+                            "/images/uploads/"
+                          )
+                        }
+                        sizes="80px"
+                        className="object-cover"
+                      />
+                      {media.type === "video" && (
+                        <div className="absolute inset-0 bg-black/40 flex items-center justify-center">
+                          <div className="w-6 h-6 rounded-full bg-red-600/90 text-white flex items-center justify-center shadow-md">
+                            <HiPlay className="w-3.5 h-3.5 translate-x-0.5" />
+                          </div>
                         </div>
-                      </div>
-                    )}
-                  </button>
-                ))}
-              </div>
+                      )}
+                    </button>
+                  ))}
+                </div>
+              )}
 
               {/* Project Specs & Switchers */}
               <div className="pt-2 border-t border-white/5 flex flex-wrap items-center justify-between gap-3 text-xs">
@@ -678,17 +550,25 @@ export default function Projects() {
                     className="px-2.5 sm:px-3 py-1.5 rounded-lg bg-white/5 hover:bg-white/15 text-gray-300 hover:text-white transition-colors text-xs font-medium flex items-center gap-1"
                   >
                     <HiChevronLeft className="w-3.5 h-3.5" />
-                    <span>{language === "ID" ? "Proyek Sebelumnya" : "Previous Project"}</span>
+                    <span>
+                      {language === "ID"
+                        ? "Proyek Sebelumnya"
+                        : "Previous Project"}
+                    </span>
                   </button>
                   <button
                     onClick={handleNextProject}
                     className="px-2.5 sm:px-3 py-1.5 rounded-lg bg-white/5 hover:bg-white/15 text-gray-300 hover:text-white transition-colors text-xs font-medium flex items-center gap-1"
                   >
-                    <span>{language === "ID" ? "Proyek Selanjutnya" : "Next Project"}</span>
+                    <span>
+                      {language === "ID"
+                        ? "Proyek Selanjutnya"
+                        : "Next Project"}
+                    </span>
                     <HiChevronRight className="w-3.5 h-3.5" />
                   </button>
                   <a
-                    href={`https://wa.me/6285792096854?text=${encodeURIComponent(
+                    href={`https://wa.me/${whatsappNumber}?text=${encodeURIComponent(
                       language === "ID"
                         ? `Halo DRYNO, saya tertarik dengan proyek ${selectedProject.title} (${selectedProject.location}). Bisa konsultasi untuk kebutuhan sumur bor kami?`
                         : `Hello DRYNO, I am interested in the ${selectedProject.title} (${selectedProject.location}) project. Can we consult regarding our deep well requirements?`
@@ -699,7 +579,9 @@ export default function Projects() {
                   >
                     <FaWhatsapp className="w-3.5 h-3.5" />
                     <span className="hidden sm:inline">
-                      {language === "ID" ? "Tanya Proyek Ini" : "Inquire Project"}
+                      {language === "ID"
+                        ? "Tanya Proyek Ini"
+                        : "Inquire Project"}
                     </span>
                   </a>
                 </div>
@@ -711,5 +593,3 @@ export default function Projects() {
     </section>
   );
 }
-
-

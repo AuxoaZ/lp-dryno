@@ -16,12 +16,11 @@ import {
   HiChevronUp,
 } from "react-icons/hi2";
 import { useLanguage } from "@/context/LanguageContext";
-import { translations } from "@/context/translations";
 
 export default function About() {
   const [isExpanded, setIsExpanded] = useState(false);
-  const { language } = useLanguage();
-  const t = translations[language].about;
+  const { language, content } = useLanguage();
+  const about = content.about;
 
   const clientTypes = [
     {
@@ -69,19 +68,19 @@ export default function About() {
             <div>
               {/* Category Tagline */}
               <span className="text-xs font-bold tracking-[0.25em] text-gray-400 uppercase block mb-3">
-                {t.category}
+                {about.category[language]}
               </span>
 
               {/* Main Heading */}
               <h2 className="text-2xl sm:text-4xl lg:text-5xl font-bold text-deep-navy leading-[1.12] tracking-tight mb-2 lg:mb-6">
-                {t.titleLine1} <br />
-                {t.titleLine2} <br />
-                {t.titleLine3}
+                {about.titleLine1[language]} <br />
+                {about.titleLine2[language]} <br />
+                {about.titleLine3[language]}
               </h2>
 
               {/* Core Description */}
               <p className="text-sm sm:text-base text-gray-600 leading-relaxed font-normal">
-                {t.description}
+                {about.description[language]}
               </p>
             </div>
 
@@ -91,7 +90,11 @@ export default function About() {
                 onClick={() => setIsExpanded(!isExpanded)}
                 className="inline-flex items-center gap-4 px-7 py-3.5 rounded-full bg-deep-navy text-white text-xs font-bold tracking-wider uppercase transition-all duration-300 hover:bg-engineering-blue hover:shadow-lg hover:scale-105 active:scale-95 group"
               >
-                <span>{isExpanded ? t.showLess : t.learnMore}</span>
+                <span>
+                  {isExpanded
+                    ? about.showLess[language]
+                    : about.learnMore[language]}
+                </span>
                 <span className="w-6 h-6 rounded-full bg-white/20 flex items-center justify-center transition-transform duration-300 group-hover:translate-x-1">
                   {isExpanded ? (
                     <HiChevronUp className="w-3.5 h-3.5 text-white" />
@@ -105,13 +108,13 @@ export default function About() {
 
           {/* Column 2: Highlights & Badges List (lg:col-span-3) */}
           <div className="lg:col-span-3 flex flex-col justify-center space-y-7 border-y lg:border-y-0 lg:border-x border-gray-100 py-6 lg:py-0 lg:px-8">
-            {/* Highlight 1: 10+ Years */}
+            {/* Highlight 1: Years Experience */}
             <div className="flex items-start gap-4">
               <div className="text-3xl sm:text-4xl font-extrabold text-deep-navy leading-none">
-                10+
+                {about.yearsExperience}
               </div>
               <div className="text-xs font-semibold text-gray-600 leading-tight whitespace-pre-line">
-                {t.fieldExp}
+                {about.fieldExp[language]}
               </div>
             </div>
 
@@ -122,10 +125,10 @@ export default function About() {
               </div>
               <div>
                 <div className="text-xs font-bold text-deep-navy">
-                  Bali • Nusa Lembongan
+                  {about.coverageLine1}
                 </div>
                 <div className="text-xs font-medium text-gray-500">
-                  Nusa Penida • NTB
+                  {about.coverageLine2}
                 </div>
               </div>
             </div>
@@ -137,7 +140,7 @@ export default function About() {
               </div>
               <div>
                 <div className="text-xs font-bold text-deep-navy whitespace-pre-line">
-                  {t.approach}
+                  {about.approach[language]}
                 </div>
               </div>
             </div>
@@ -149,7 +152,7 @@ export default function About() {
               </div>
               <div>
                 <div className="text-xs font-bold text-deep-navy whitespace-pre-line">
-                  {t.technical}
+                  {about.technical[language]}
                 </div>
               </div>
             </div>
@@ -158,9 +161,13 @@ export default function About() {
           {/* Column 3: Featured Coastal Image Container (lg:col-span-4) */}
           <div className="lg:col-span-4 relative min-h-[320px] lg:min-h-[380px] rounded-2xl overflow-hidden shadow-xl group">
             <Image
-              src="/images/about-villa.jpg"
+              src={about.image || "/images/about-villa.jpg"}
               alt="Supporting Development with Reliable Water Solutions in Bali"
               fill
+              unoptimized={
+                about.image?.startsWith("http") ||
+                about.image?.startsWith("/images/uploads/")
+              }
               className="object-cover object-center transition-transform duration-700 group-hover:scale-105"
             />
             {/* Gradient Overlay */}
@@ -168,22 +175,8 @@ export default function About() {
 
             {/* Overlay Text */}
             <div className="absolute bottom-0 left-0 right-0 p-6 sm:p-8 z-10 text-white">
-              <h3 className="text-xl sm:text-2xl font-black tracking-tight leading-tight mb-3 drop-shadow-md">
-                {language === "EN" ? (
-                  <>
-                    Supporting <br />
-                    Development <br />
-                    With Reliable <br />
-                    Water Solutions
-                  </>
-                ) : (
-                  <>
-                    Mendukung <br />
-                    Pembangunan <br />
-                    Dengan Solusi <br />
-                    Air yang Andal
-                  </>
-                )}
+              <h3 className="text-xl sm:text-2xl font-black tracking-tight leading-tight mb-3 drop-shadow-md max-w-[240px]">
+                {about.bannerOverlayText[language]}
               </h3>
               <div className="w-1/2 h-1 bg-engineering-blue-light rounded-full" />
             </div>
@@ -207,11 +200,11 @@ export default function About() {
                     <HiBuildingOffice2 className="w-5 h-5" />
                   </div>
                   <h4 className="text-base font-extrabold text-deep-navy uppercase tracking-wider">
-                    {t.sectorsTitle}
+                    {about.sectorsTitle[language]}
                   </h4>
                 </div>
                 <p className="text-sm text-gray-600 leading-relaxed mb-6 font-normal">
-                  {t.sectorsDesc}
+                  {about.sectorsDesc[language]}
                 </p>
               </div>
 
@@ -236,21 +229,21 @@ export default function About() {
                     <HiSparkles className="w-5 h-5" />
                   </div>
                   <h4 className="text-base font-extrabold text-deep-navy uppercase tracking-wider">
-                    {t.processTitle}
+                    {about.processTitle[language]}
                   </h4>
                 </div>
                 <p className="text-sm text-gray-600 leading-relaxed mb-6 font-normal">
-                  {t.processDesc}
+                  {about.processDesc[language]}
                 </p>
               </div>
 
               <div className="p-4 rounded-xl bg-white border border-gray-200/80">
                 <div className="text-xs font-bold text-deep-navy mb-1 flex items-center gap-2">
                   <span className="w-2 h-2 rounded-full bg-engineering-blue-light" />
-                  {t.dataDrivenTitle}
+                  {about.dataDrivenTitle[language]}
                 </div>
                 <p className="text-xs text-gray-500">
-                  {t.dataDrivenDesc}
+                  {about.dataDrivenDesc[language]}
                 </p>
               </div>
             </div>
@@ -263,11 +256,11 @@ export default function About() {
                     <HiShieldCheck className="w-5 h-5" />
                   </div>
                   <h4 className="text-base font-extrabold text-deep-navy uppercase tracking-wider">
-                    {t.permitTitle}
+                    {about.permitTitle[language]}
                   </h4>
                 </div>
                 <p className="text-sm text-gray-600 leading-relaxed mb-6 font-normal">
-                  {t.permitDesc}
+                  {about.permitDesc[language]}
                 </p>
               </div>
 
