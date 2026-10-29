@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-29T16:00:50.472Z",
+  "updatedAt": "2026-10-29T16:02:23.377Z",
   "hero": {
     "tagline": {
       "EN": "Engineering Water Solution",
@@ -25,7 +25,7 @@
     "images": [
       {
         "id": "01",
-        "src": "/images/uploads/1793289633518-download.jpg",
+        "src": "/images/bg-hero-1.jpeg",
         "alt": "DRYNO Deep Well Drilling Rig 1"
       },
       {
