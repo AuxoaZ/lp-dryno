@@ -58,24 +58,24 @@ export default function Services() {
   return (
     <section
       id="services"
-      className="relative py-12 sm:py-20 lg:py-24 bg-warm-white text-deep-navy overflow-hidden"
+      className="relative py-8 sm:py-16 lg:py-24 bg-warm-white text-deep-navy overflow-hidden"
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
-        <div className="max-w-3xl mb-8 sm:mb-14">
-          <span className="text-xs font-bold tracking-[0.25em] text-gray-400 uppercase block mb-3">
+        <div className="max-w-3xl mb-5 sm:mb-12">
+          <span className="text-[10px] sm:text-xs font-bold tracking-[0.25em] text-gray-400 uppercase block mb-1.5 sm:mb-3">
             {meta.eyebrow[language]}
           </span>
-          <h2 className="text-2.5xl sm:text-4xl lg:text-5xl font-extrabold text-deep-navy leading-tight tracking-tight mb-3 sm:mb-4">
+          <h2 className="text-2.5xl sm:text-4xl lg:text-5xl font-extrabold text-deep-navy leading-tight tracking-tight mb-2 sm:mb-4">
             {meta.title[language]}
           </h2>
-          <p className="text-sm sm:text-base text-gray-600 font-normal">
+          <p className="text-xs sm:text-base text-gray-600 font-normal">
             {meta.subtitle[language]}
           </p>
         </div>
 
         {/* Services / Products Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-5">
           {visibleProducts.map((service) => {
             const Icon = getCategoryIcon(service.category, service.id);
             const title = service.name[language];
@@ -89,7 +89,7 @@ export default function Services() {
                 className="group cursor-pointer rounded-2xl bg-white border border-gray-100 shadow-xs hover:shadow-xl hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between overflow-hidden"
               >
                 {/* Thumbnail Image Container */}
-                <div className="relative h-40 w-full overflow-hidden bg-gray-100">
+                <div className="relative h-36 sm:h-40 w-full overflow-hidden bg-gray-100">
                   <Image
                     src={service.image || "/images/service-1.jpg"}
                     alt={title}
@@ -101,7 +101,7 @@ export default function Services() {
                     sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw"
                     className="object-cover object-center group-hover:scale-105 transition-transform duration-500"
                   />
-                  <div className="absolute top-2.5 left-2.5 px-2.5 py-1 rounded-md bg-deep-navy/80 backdrop-blur-xs text-[10px] font-bold text-white tracking-widest">
+                  <div className="absolute top-2.5 left-2.5 px-2 py-0.5 rounded-md bg-deep-navy/80 backdrop-blur-xs text-[10px] font-bold text-white tracking-widest">
                     {service.number}
                   </div>
                   {service.status === "Featured" && (
@@ -112,26 +112,26 @@ export default function Services() {
                 </div>
 
                 {/* Content Area */}
-                <div className="p-4 flex flex-col justify-between flex-grow">
+                <div className="p-3.5 sm:p-4 flex flex-col justify-between flex-grow">
                   <div>
                     {/* Icon + Title Header */}
-                    <div className="flex items-start gap-2.5 mb-2">
+                    <div className="flex items-start gap-2 mb-1.5">
                       <div className="p-1.5 rounded-lg bg-engineering-blue/10 text-engineering-blue shrink-0 mt-0.5">
-                        <Icon className="w-4 h-4" />
+                        <Icon className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
                       </div>
                       <h3 className="text-xs sm:text-sm font-extrabold text-deep-navy leading-snug">
                         {title}
                       </h3>
                     </div>
                     {service.shortDesc?.[language] && (
-                      <p className="text-xs text-gray-500 line-clamp-2 mb-2 pl-7">
+                      <p className="text-[11px] sm:text-xs text-gray-500 line-clamp-2 mb-2 pl-6 sm:pl-7">
                         {service.shortDesc[language]}
                       </p>
                     )}
                   </div>
 
                   {/* Price & Action Button Row */}
-                  <div className="pt-3 border-t border-gray-100 flex items-end justify-between gap-2 mt-2">
+                  <div className="pt-2 sm:pt-3 border-t border-gray-100 flex items-end justify-between gap-2 mt-1 sm:mt-2">
                     <div>
                       <span className="text-[10px] font-semibold text-gray-400 block leading-tight">
                         {priceText}

@@ -7,9 +7,19 @@ import WaterTankerCalculator from "@/components/WaterTankerCalculator";
 import CalculatorBreadcrumb from "@/components/CalculatorBreadcrumb";
 
 export const metadata: Metadata = {
-  title: "Water Tanker Cost Calculator | DRYNO - Ground Water Solution Bali",
+  title: "Kalkulator Biaya Air Tangki vs Sumur Bor Bali | DRYNO",
   description:
-    "Estimate your property's 5, 10, and 25-year water tanker delivery expenditures versus independent deep well water infrastructure in Bali.",
+    "Simulasikan dan hitung pengeluaran air truk tangki komersial 5, 10, hingga 25 tahun untuk villa, hotel, dan bisnis di Bali dibandingkan investasi sumur bor mandiri.",
+  alternates: {
+    canonical: "/calculator",
+  },
+  openGraph: {
+    title: "Kalkulator Pengeluaran Air Tangki vs Sumur Bor | DRYNO Bali",
+    description:
+      "Hitung estimasi pengeluaran air truk tangki komersial untuk properti villa dan bisnis Anda di Bali dalam proyeksi 5, 10, hingga 25 tahun.",
+    url: "https://dryno.co.id/calculator",
+    type: "website",
+  },
 };
 
 export default function CalculatorPage() {
@@ -17,9 +27,9 @@ export default function CalculatorPage() {
     <main className="min-h-screen bg-warm-white flex flex-col font-sans">
       <Navbar />
 
-      <div className="pt-24 sm:pt-28">
+      <div className="pt-20 sm:pt-28">
         {/* Navigation Breadcrumb */}
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-4 pb-2">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-2 sm:pt-4 pb-1 sm:pb-2">
           <CalculatorBreadcrumb />
         </div>
 

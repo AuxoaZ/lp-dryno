@@ -133,48 +133,48 @@ export default function Projects() {
   return (
     <section
       id="projects"
-      className="relative py-12 sm:py-20 lg:py-24 bg-white text-deep-navy overflow-hidden"
+      className="relative py-8 sm:py-16 lg:py-24 bg-white text-deep-navy overflow-hidden"
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header with Slider Navigation Controls */}
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between mb-6 sm:mb-12 pb-4 sm:pb-6 border-b border-gray-100 gap-4">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between mb-4 sm:mb-10 pb-3 sm:pb-6 border-b border-gray-100 gap-3 sm:gap-4">
           {/* Title Area */}
           <div>
-            <span className="text-xs font-bold tracking-[0.25em] text-gray-400 uppercase block mb-2">
+            <span className="text-[10px] sm:text-xs font-bold tracking-[0.25em] text-gray-400 uppercase block mb-1 sm:mb-2">
               {t.eyebrow}
             </span>
-            <h2 className="text-2xl sm:text-3xl lg:text-5xl font-bold text-deep-navy tracking-tight">
+            <h2 className="text-2.5xl sm:text-3xl lg:text-5xl font-bold text-deep-navy tracking-tight">
               {t.title}
             </h2>
           </div>
 
           {/* Controls & Action Link */}
-          <div className="flex items-center gap-6">
+          <div className="flex items-center gap-4 sm:gap-6">
             {/* Slider Navigation Arrows */}
-            <div className="flex items-center gap-2">
+            <div className="flex items-center gap-1.5 sm:gap-2">
               <button
                 onClick={() => scroll("left")}
                 aria-label="Previous project"
-                className="w-9 h-9 rounded-full border border-gray-200 text-gray-600 hover:bg-deep-navy hover:text-white hover:border-deep-navy flex items-center justify-center transition-all duration-300 active:scale-95 shadow-2xs"
+                className="w-8 h-8 sm:w-9 sm:h-9 rounded-full border border-gray-200 text-gray-600 hover:bg-deep-navy hover:text-white hover:border-deep-navy flex items-center justify-center transition-all duration-300 active:scale-95 shadow-2xs"
               >
-                <HiChevronLeft className="w-5 h-5" />
+                <HiChevronLeft className="w-4 h-4 sm:w-5 sm:h-5" />
               </button>
               <button
                 onClick={() => scroll("right")}
                 aria-label="Next project"
-                className="w-9 h-9 rounded-full border border-gray-200 text-gray-600 hover:bg-deep-navy hover:text-white hover:border-deep-navy flex items-center justify-center transition-all duration-300 active:scale-95 shadow-2xs"
+                className="w-8 h-8 sm:w-9 sm:h-9 rounded-full border border-gray-200 text-gray-600 hover:bg-deep-navy hover:text-white hover:border-deep-navy flex items-center justify-center transition-all duration-300 active:scale-95 shadow-2xs"
               >
-                <HiChevronRight className="w-5 h-5" />
+                <HiChevronRight className="w-4 h-4 sm:w-5 sm:h-5" />
               </button>
             </div>
 
             {/* View All Projects Link */}
             <a
               href="#contact"
-              className="inline-flex items-center gap-2 text-xs font-bold text-gray-500 hover:text-engineering-blue tracking-widest uppercase transition-colors"
+              className="inline-flex items-center gap-1.5 text-[11px] sm:text-xs font-bold text-gray-500 hover:text-engineering-blue tracking-widest uppercase transition-colors"
             >
               <span>{t.viewAll}</span>
-              <HiArrowRight className="w-3.5 h-3.5" />
+              <HiArrowRight className="w-3 h-3 sm:w-3.5 sm:h-3.5" />
             </a>
           </div>
         </div>
@@ -182,7 +182,7 @@ export default function Projects() {
         {/* Slidable Cards Row / Responsive Grid */}
         <div
           ref={scrollContainerRef}
-          className="flex overflow-x-auto gap-6 pb-4 scroll-smooth snap-x snap-mandatory [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden"
+          className="flex overflow-x-auto gap-3 sm:gap-6 pb-2.5 sm:pb-4 scroll-smooth snap-x snap-mandatory [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden"
         >
           {projects.map((project) => {
             const galleryList = project.gallery || [];
@@ -206,10 +206,10 @@ export default function Projects() {
                 role="button"
                 tabIndex={0}
                 aria-label={`${t.openGalleryText}: ${project.title}`}
-                className="min-w-[300px] sm:min-w-[360px] lg:min-w-[380px] flex-1 snap-start group rounded-2xl bg-warm-white border border-gray-100/80 shadow-xs hover:shadow-2xl hover:border-engineering-blue/40 transition-all duration-300 flex flex-col justify-between overflow-hidden cursor-pointer focus:outline-none focus:ring-2 focus:ring-engineering-blue"
+                className="min-w-[270px] sm:min-w-[360px] lg:min-w-[380px] flex-1 snap-start group rounded-2xl bg-warm-white border border-gray-100/80 shadow-xs hover:shadow-2xl hover:border-engineering-blue/40 transition-all duration-300 flex flex-col justify-between overflow-hidden cursor-pointer focus:outline-none focus:ring-2 focus:ring-engineering-blue"
               >
                 {/* Project Image with Photo & Video Badges + Hover Overlay */}
-                <div className="relative h-48 sm:h-52 w-full overflow-hidden bg-gray-100">
+                <div className="relative h-40 sm:h-52 w-full overflow-hidden bg-gray-100">
                   <Image
                     src={project.image || "/images/project/maison.png"}
                     alt={project.title}

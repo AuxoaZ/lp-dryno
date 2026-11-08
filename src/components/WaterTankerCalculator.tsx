@@ -68,7 +68,7 @@ export default function WaterTankerCalculator() {
   return (
     <section
       id="tanker-calculator"
-      className="relative py-12 sm:py-20 bg-warm-white text-deep-navy overflow-hidden"
+      className="relative py-6 sm:py-16 lg:py-20 bg-warm-white text-deep-navy overflow-hidden"
     >
       {/* Decorative ambient lights */}
       <div className="absolute top-1/4 left-0 -ml-20 w-80 h-80 rounded-full bg-engineering-blue/5 blur-3xl pointer-events-none" />
@@ -76,25 +76,25 @@ export default function WaterTankerCalculator() {
 
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
-        <div className="max-w-4xl mb-10 sm:mb-14">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-engineering-blue/10 border border-engineering-blue/20 text-engineering-blue text-xs font-bold tracking-wider uppercase mb-4">
-            <HiCalculator className="w-4 h-4 text-engineering-blue shrink-0" />
+        <div className="max-w-4xl mb-4 sm:mb-10 lg:mb-14">
+          <div className="inline-flex items-center gap-2 px-3 py-1 sm:px-3.5 sm:py-1.5 rounded-full bg-engineering-blue/10 border border-engineering-blue/20 text-engineering-blue text-[11px] sm:text-xs font-bold tracking-wider uppercase mb-2 sm:mb-4">
+            <HiCalculator className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-engineering-blue shrink-0" />
             <span>{t.badge}</span>
           </div>
 
-          <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-deep-navy leading-[1.15] tracking-tight mb-4">
+          <h1 className="text-2.5xl sm:text-4xl lg:text-5xl font-extrabold text-deep-navy leading-[1.15] tracking-tight mb-2 sm:mb-4">
             {t.title}
           </h1>
 
-          <p className="text-sm sm:text-base lg:text-lg text-gray-700 leading-relaxed font-normal">
+          <p className="text-xs sm:text-base lg:text-lg text-gray-700 leading-relaxed font-normal">
             {t.desc}
           </p>
         </div>
 
         {/* Main Calculator Grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start mb-12">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-4 sm:gap-8 items-start mb-6 sm:mb-12">
           {/* Controls Column (lg:col-span-6) */}
-          <div className="lg:col-span-6 bg-white rounded-3xl p-6 sm:p-8 shadow-xl border border-gray-100/90 space-y-7">
+          <div className="lg:col-span-6 bg-white rounded-3xl p-4 sm:p-8 shadow-xl border border-gray-100/90 space-y-4 sm:space-y-7">
             <div>
               <h2 className="text-base sm:text-lg font-bold text-deep-navy mb-1 flex items-center gap-2">
                 <HiSparkles className="w-5 h-5 text-engineering-blue" />
@@ -246,44 +246,44 @@ export default function WaterTankerCalculator() {
           </div>
 
           {/* Results Dashboard Column (lg:col-span-6) */}
-          <div className="lg:col-span-6 space-y-6">
+          <div className="lg:col-span-6 space-y-4 sm:space-y-6">
             {/* Grand Total Highlight Banner */}
-            <div className="rounded-3xl bg-gradient-to-br from-deep-navy via-deep-navy to-engineering-blue text-white p-6 sm:p-8 shadow-2xl relative overflow-hidden">
+            <div className="rounded-3xl bg-gradient-to-br from-deep-navy via-deep-navy to-engineering-blue text-white p-4 sm:p-8 shadow-2xl relative overflow-hidden">
               <div className="absolute top-0 right-0 -mr-12 -mt-12 w-48 h-48 rounded-full bg-engineering-blue-light/20 blur-2xl pointer-events-none" />
 
-              <div className="relative z-10 space-y-4">
+              <div className="relative z-10 space-y-3 sm:space-y-4">
                 <div className="flex items-center justify-between">
-                  <span className="text-[11px] font-extrabold uppercase tracking-widest text-engineering-blue-light px-3 py-1 rounded-full bg-white/10 backdrop-blur-md">
+                  <span className="text-[10px] sm:text-[11px] font-extrabold uppercase tracking-widest text-engineering-blue-light px-2.5 py-0.5 sm:px-3 sm:py-1 rounded-full bg-white/10 backdrop-blur-md">
                     {language === "ID"
                       ? `PROYEKSI BIAYA (${projectionYears} TAHUN)`
                       : `PROJECTED EXPENSE (${projectionYears} YEARS)`}
                   </span>
-                  <span className="text-xs font-medium text-gray-300">
+                  <span className="text-[11px] sm:text-xs font-medium text-gray-300">
                     {language === "ID" ? "Pembelian Air Tangki" : "Delivered Water Tankers"}
                   </span>
                 </div>
 
                 <div>
-                  <span className="text-xs text-gray-300 font-light block mb-1">
+                  <span className="text-[11px] sm:text-xs text-gray-300 font-light block mb-1">
                     {language === "ID"
                       ? `Akumulasi Pengeluaran Air Tangki (${projectionYears} Tahun)`
                       : `Cumulative Water Delivery Cost (${projectionYears} Years)`}
                   </span>
-                  <div className="text-2.5xl sm:text-4xl lg:text-4.5xl font-black text-white tracking-tight leading-none drop-shadow-md">
+                  <div className="text-2xl sm:text-4xl lg:text-4.5xl font-black text-white tracking-tight leading-none drop-shadow-md">
                     {formatIDR(calculations.projectedCost)}
                   </div>
                 </div>
 
                 {/* Multi-year Timeline Comparison */}
-                <div className="pt-4 border-t border-white/15 space-y-2">
-                  <div className="text-[11px] font-semibold text-gray-300 flex justify-between">
+                <div className="pt-3 sm:pt-4 border-t border-white/15 space-y-1.5 sm:space-y-2">
+                  <div className="text-[10px] sm:text-[11px] font-semibold text-gray-300 flex justify-between">
                     <span>
                       {language === "ID"
                         ? "Perbandingan Akumulasi Horizon:"
                         : "Cumulative Timeline Comparison:"}
                     </span>
                   </div>
-                  <div className="grid grid-cols-3 gap-2 text-center">
+                  <div className="grid grid-cols-3 gap-1.5 sm:gap-2 text-center">
                     <div
                       className={`p-2 rounded-xl transition-all ${projectionYears === 5
                         ? "bg-white/20 border border-white/30"
@@ -331,15 +331,15 @@ export default function WaterTankerCalculator() {
             </div>
 
             {/* Metrics Breakdown Cards */}
-            <div className="grid grid-cols-2 gap-4">
+            <div className="grid grid-cols-2 gap-2.5 sm:gap-4">
               {/* Metric 1: Monthly Demand */}
-              <div className="p-4 sm:p-5 rounded-2xl bg-white border border-gray-100 shadow-sm">
-                <span className="text-[11px] font-bold text-gray-400 uppercase tracking-wider block mb-1">
+              <div className="p-3 sm:p-5 rounded-2xl bg-white border border-gray-100 shadow-sm">
+                <span className="text-[10px] sm:text-[11px] font-bold text-gray-400 uppercase tracking-wider block mb-0.5 sm:mb-1">
                   {language === "ID" ? "Kebutuhan Bulanan" : "Monthly Demand"}
                 </span>
-                <div className="text-lg sm:text-xl font-extrabold text-deep-navy">
+                <div className="text-base sm:text-xl font-extrabold text-deep-navy">
                   {formatNumber(calculations.monthlyVolume)}{" "}
-                  <span className="text-xs font-medium text-gray-500">
+                  <span className="text-[11px] sm:text-xs font-medium text-gray-500">
                     {language === "ID" ? "Liter" : "Liters"}
                   </span>
                 </div>
@@ -349,48 +349,48 @@ export default function WaterTankerCalculator() {
               </div>
 
               {/* Metric 2: Equivalent Tankers */}
-              <div className="p-4 sm:p-5 rounded-2xl bg-white border border-gray-100 shadow-sm">
-                <span className="text-[11px] font-bold text-gray-400 uppercase tracking-wider block mb-1">
+              <div className="p-3 sm:p-5 rounded-2xl bg-white border border-gray-100 shadow-sm">
+                <span className="text-[10px] sm:text-[11px] font-bold text-gray-400 uppercase tracking-wider block mb-0.5 sm:mb-1">
                   {language === "ID" ? "Ritase Tangki" : "Equivalent Tankers"}
                 </span>
-                <div className="text-lg sm:text-xl font-extrabold text-engineering-blue flex items-baseline gap-1">
+                <div className="text-base sm:text-xl font-extrabold text-engineering-blue flex items-baseline gap-1">
                   <span>
                     {calculations.tanksPerMonth % 1 === 0
                       ? calculations.tanksPerMonth
                       : calculations.tanksPerMonth.toFixed(1)}
                   </span>
-                  <span className="text-xs font-medium text-gray-500">
+                  <span className="text-[11px] sm:text-xs font-medium text-gray-500">
                     {language === "ID" ? "Tangki / bln" : "Trucks / mo"}
                   </span>
                 </div>
                 <span className="text-[10px] text-gray-400 mt-0.5 block">
-                  {language === "ID" ? "5.000 L / armada tangki" : "5,000 L / tanker truck"}
+                  {language === "ID" ? "5.000 L / armada" : "5,000 L / tanker"}
                 </span>
               </div>
 
               {/* Metric 3: Monthly Cost */}
-              <div className="p-4 sm:p-5 rounded-2xl bg-white border border-gray-100 shadow-sm">
-                <span className="text-[11px] font-bold text-gray-400 uppercase tracking-wider block mb-1">
+              <div className="p-3 sm:p-5 rounded-2xl bg-white border border-gray-100 shadow-sm">
+                <span className="text-[10px] sm:text-[11px] font-bold text-gray-400 uppercase tracking-wider block mb-0.5 sm:mb-1">
                   {t.monthlyEst}
                 </span>
-                <div className="text-base sm:text-lg font-extrabold text-deep-navy">
+                <div className="text-sm sm:text-lg font-extrabold text-deep-navy">
                   {formatIDR(calculations.monthlyCost)}
                 </div>
                 <span className="text-[10px] text-gray-400 mt-0.5 block">
-                  {language === "ID" ? "Ritase tangki × harga" : "Equivalent tankers × price"}
+                  {language === "ID" ? "Ritase × harga" : "Tankers × price"}
                 </span>
               </div>
 
               {/* Metric 4: Annual Cost */}
-              <div className="p-4 sm:p-5 rounded-2xl bg-white border border-gray-100 shadow-sm">
-                <span className="text-[11px] font-bold text-gray-400 uppercase tracking-wider block mb-1">
+              <div className="p-3 sm:p-5 rounded-2xl bg-white border border-gray-100 shadow-sm">
+                <span className="text-[10px] sm:text-[11px] font-bold text-gray-400 uppercase tracking-wider block mb-0.5 sm:mb-1">
                   {t.yearlyEst}
                 </span>
-                <div className="text-base sm:text-lg font-extrabold text-deep-navy">
+                <div className="text-sm sm:text-lg font-extrabold text-deep-navy">
                   {formatIDR(calculations.yearlyCost)}
                 </div>
                 <span className="text-[10px] text-gray-400 mt-0.5 block">
-                  {language === "ID" ? "Biaya bulanan × 12 bulan" : "Monthly cost × 12 months"}
+                  {language === "ID" ? "Bulanan × 12 bln" : "Monthly × 12 mo"}
                 </span>
               </div>
             </div>
