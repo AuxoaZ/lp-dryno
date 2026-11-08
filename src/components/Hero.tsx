@@ -10,6 +10,12 @@ export default function Hero() {
   const { language, content } = useLanguage();
   const hero = content.hero;
 
+  const portraitImages = [
+    "/images/hero-potrait/bg-hero-potrait-1.webp",
+    "/images/hero-potrait/bg-hero-potrait-2.webp",
+    "/images/hero-potrait/bg-hero-potrait-3.webp",
+  ];
+
   const heroImages =
     hero.images && hero.images.length > 0
       ? hero.images
@@ -45,24 +51,43 @@ export default function Hero() {
               safeSlide === index ? "opacity-100 z-10" : "opacity-0 z-0"
             }`}
           >
-            <Image
-              src={image.src}
-              alt={image.alt || "Hero background"}
-              fill
-              priority={index === 0}
-              unoptimized={
-                image.src.startsWith("http") ||
-                image.src.startsWith("/images/uploads/")
-              }
-              className={`object-cover object-center transition-transform duration-[6000ms] ease-out ${
-                safeSlide === index ? "scale-105" : "scale-100"
-              }`}
-            />
+            {/* Mobile Portrait Background */}
+            <div className="sm:hidden absolute inset-0">
+              <Image
+                src={portraitImages[index % portraitImages.length]}
+                alt={image.alt || "Hero background portrait"}
+                fill
+                priority={index === 0}
+                className={`object-cover object-center transition-transform duration-[6000ms] ease-out ${
+                  safeSlide === index ? "scale-105" : "scale-100"
+                }`}
+              />
+            </div>
+
+            {/* Desktop Landscape Background */}
+            <div className="hidden sm:block absolute inset-0">
+              <Image
+                src={image.src}
+                alt={image.alt || "Hero background"}
+                fill
+                priority={index === 0}
+                unoptimized={
+                  image.src.startsWith("http") ||
+                  image.src.startsWith("/images/uploads/")
+                }
+                className={`object-cover object-center transition-transform duration-[6000ms] ease-out ${
+                  safeSlide === index ? "scale-105" : "scale-100"
+                }`}
+              />
+            </div>
           </div>
         ))}
         {/* Gradients for readability */}
-        <div className="absolute inset-0 z-20 bg-gradient-to-r from-deep-navy-dark/95 via-deep-navy/80 to-transparent lg:w-3/4" />
-        <div className="absolute inset-0 z-20 bg-gradient-to-t from-deep-navy-dark via-transparent to-deep-navy/50" />
+        {/* Mobile Gradient Overlay */}
+        <div className="sm:hidden absolute inset-0 z-20 bg-gradient-to-t from-deep-navy-dark via-deep-navy/75 to-deep-navy/45" />
+        {/* Desktop Gradient Overlay */}
+        <div className="hidden sm:block absolute inset-0 z-20 bg-gradient-to-r from-deep-navy-dark/95 via-deep-navy/80 to-transparent lg:w-3/4" />
+        <div className="hidden sm:block absolute inset-0 z-20 bg-gradient-to-t from-deep-navy-dark via-transparent to-deep-navy/50" />
       </div>
 
       {/* Hero Content Container */}
