@@ -16,7 +16,7 @@ export default function StructuredData() {
     description:
       "Integrated ground water solution provider specializing in ground water investigation (geolistrik), deep well drilling (sumur bor dalam), well installation, and SIPA ground water permits in Bali, Nusa Penida, Nusa Lembongan, and NTB.",
     telephone: "+6285792096854",
-    email: "info@dryno.co.id",
+    email: "info@drynotech.com",
     priceRange: "$$",
     address: {
       "@type": "PostalAddress",
