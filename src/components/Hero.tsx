@@ -40,7 +40,7 @@ export default function Hero() {
   return (
     <section
       id="home"
-      className="relative min-h-[85vh] sm:min-h-screen w-full flex items-center pt-16 sm:pt-24 pb-4 sm:pb-16 overflow-hidden bg-deep-navy"
+      className="relative h-screen sm:min-h-screen w-full flex items-center pt-16 sm:pt-24 pb-4 sm:pb-16 overflow-hidden bg-deep-navy"
     >
       {/* Background Images Slider with Smooth Overlay */}
       <div className="absolute inset-0 z-0">
@@ -91,7 +91,7 @@ export default function Hero() {
       </div>
 
       {/* Hero Content Container */}
-      <div className="relative z-30 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full flex flex-col justify-between sm:min-h-[calc(100vh-7rem)]">
+      <div className="relative z-30 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full h-full flex flex-col justify-between sm:min-h-[calc(100vh-7rem)]">
         {/* Main Text Content (Static Headline & Description) */}
         <div className="max-w-2xl my-auto pt-2 sm:pt-8">
           {/* Subtitle Tagline */}
@@ -103,7 +103,7 @@ export default function Hero() {
           </div>
 
           {/* Main Headline */}
-          <h1 className="text-2.5xl sm:text-5xl lg:text-6xl font-bold text-warm-white leading-[1.16] sm:leading-[1.15] tracking-tight mb-2.5 sm:mb-6 drop-shadow-md text-center md:text-start">
+          <h1 className="text-3xl sm:text-5xl lg:text-6xl font-bold text-warm-white leading-[1.16] sm:leading-[1.15] tracking-tight mb-2.5 sm:mb-6 drop-shadow-md text-center md:text-start">
             {hero.headline[language]}
           </h1>
 
@@ -113,26 +113,26 @@ export default function Hero() {
           </p>
 
           {/* Action Buttons */}
-          <div className="flex flex-row justify-center md:justify-start items-center gap-2 sm:gap-5 mb-3 sm:mb-4">
+          <div className="flex flex-col sm:flex-row items-center sm:items-center justify-center md:justify-start gap-2.5 sm:gap-5 mb-4 sm:mb-4">
             {/* Primary CTA */}
             <a
               href="#contact"
-              className="inline-flex items-center justify-between sm:justify-start gap-2 sm:gap-3 px-3.5 py-2 sm:px-7 sm:py-4 rounded-full bg-white text-deep-navy font-bold text-[10px] sm:text-sm tracking-wider uppercase transition-all duration-300 hover:bg-warm-white hover:shadow-2xl hover:scale-105 active:scale-95 group shadow-lg shrink-0"
+              className="inline-flex items-center justify-between sm:justify-start gap-3 px-5 py-2.5 sm:px-7 sm:py-4 rounded-full bg-white text-deep-navy font-bold text-xs sm:text-sm tracking-wider uppercase transition-all duration-300 hover:bg-warm-white hover:shadow-2xl hover:scale-105 active:scale-95 group shadow-lg w-full max-w-[270px] sm:w-auto sm:max-w-none"
             >
               <span>{hero.ctaDiscuss[language]}</span>
-              <span className="w-5 h-5 sm:w-8 sm:h-8 rounded-full bg-deep-navy flex items-center justify-center transition-transform duration-300 group-hover:translate-x-1">
-                <HiArrowRight className="w-2.5 h-2.5 sm:w-4 sm:h-4 text-white" />
+              <span className="w-6 h-6 sm:w-8 sm:h-8 rounded-full bg-deep-navy flex items-center justify-center transition-transform duration-300 group-hover:translate-x-1">
+                <HiArrowRight className="w-3 h-3 sm:w-4 sm:h-4 text-white" />
               </span>
             </a>
 
             {/* Secondary CTA */}
             <a
               href="#services"
-              className="glass-button inline-flex items-center justify-between sm:justify-start gap-2 sm:gap-3 px-3.5 py-2 sm:px-7 sm:py-4 rounded-full text-warm-white font-bold text-[10px] sm:text-sm tracking-wider uppercase transition-all duration-300 hover:text-white group shrink-0"
+              className="glass-button inline-flex items-center justify-between sm:justify-start gap-3 px-5 py-2.5 sm:px-7 sm:py-4 rounded-full text-warm-white font-bold text-xs sm:text-sm tracking-wider uppercase transition-all duration-300 hover:text-white group w-full max-w-[270px] sm:w-auto sm:max-w-none"
             >
               <span>{hero.ctaServices[language]}</span>
-              <span className="w-5 h-5 sm:w-8 sm:h-8 rounded-full border border-white/40 flex items-center justify-center transition-transform duration-300 group-hover:translate-x-1 group-hover:border-white">
-                <HiChevronRight className="w-2.5 h-2.5 sm:w-4 sm:h-4 text-warm-white" />
+              <span className="w-6 h-6 sm:w-8 sm:h-8 rounded-full border border-white/40 flex items-center justify-center transition-transform duration-300 group-hover:translate-x-1 group-hover:border-white">
+                <HiChevronRight className="w-3 h-3 sm:w-4 sm:h-4 text-warm-white" />
               </span>
             </a>
           </div>
@@ -143,7 +143,9 @@ export default function Hero() {
           {/* Location Pin Information */}
           <div className="flex items-center gap-1.5 text-[10px] sm:text-sm font-semibold tracking-wider sm:tracking-widest text-warm-white/90">
             <HiMapPin className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-engineering-blue-light animate-bounce shrink-0" />
-            <span className="truncate max-w-[200px] sm:max-w-none">{hero.location}</span>
+            <span className="truncate max-w-[200px] sm:max-w-none">
+              {hero.location}
+            </span>
           </div>
 
           {/* Interactive Slide Controls */}
