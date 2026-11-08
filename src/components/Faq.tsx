@@ -4,47 +4,14 @@ import React, { useState } from "react";
 import {
   HiPlus,
   HiMinus,
-  HiQuestionMarkCircle,
   HiChatBubbleLeftEllipsis,
 } from "react-icons/hi2";
+import { useLanguage } from "@/context/LanguageContext";
 
 export default function Faq() {
   const [openIndex, setOpenIndex] = useState<number | null>(0);
-
-  const faqs = [
-    {
-      question:
-        "Why is a ground water investigation recommended before drilling?",
-      answer:
-        "Ground Water investigation (geoelectric survey) provides critical subsurface information to identify potential ground water-bearing zones, estimate depth indications, and assess geological formations before drilling. This minimizes financial risk and helps select the most optimal drilling point.",
-    },
-    {
-      question: "How deep do you usually drill for deep wells in Bali & NTB?",
-      answer:
-        "Drilling depths vary significantly based on location and regional hydrogeology. For instance, cliff terrain in Uluwatu or Pecatu may require depths between 100m to 220m+, whereas coastal plains or inland areas may require different depths. We do not guarantee a universal depth and determine drilling depth according to site conditions.",
-    },
-    {
-      question: "How long does a typical deep well drilling project take?",
-      answer:
-        "On average, field drilling and well casing installation take between 2 to 4 weeks, depending on target depth, subsurface rock hardness, site accessibility, and weather conditions.",
-    },
-    {
-      question:
-        "What is SIPA and why is it necessary for my commercial project?",
-      answer:
-        "SIPA (Surat Izin Pengusahaan Air Tanah) is the official government permit required for ground water extraction and utilization. Having a valid SIPA ensures your villa, resort, or commercial project remains legally compliant with environmental regulations.",
-    },
-    {
-      question: "Which areas in Indonesia does DRYNO cover?",
-      answer:
-        "DRYNO provides integrated ground water solutions across Bali, Nusa Lembongan, Nusa Penida, and West Nusa Tenggara (NTB) including Lombok and surrounding regions.",
-    },
-    {
-      question: "How do I request an accurate quotation for my project?",
-      answer:
-        "You can contact our engineering team directly via WhatsApp or our contact form. We will review your project location, estimated water requirements, and site accessibility to provide a detailed project proposal.",
-    },
-  ];
+  const { language, content } = useLanguage();
+  const faq = content.faq;
 
   const toggleFaq = (index: number) => {
     setOpenIndex(openIndex === index ? null : index);
@@ -62,15 +29,13 @@ export default function Faq() {
           <div className="lg:col-span-5 space-y-6 lg:sticky lg:top-28">
             <div>
               <span className="text-xs font-bold tracking-[0.25em] text-gray-400 uppercase block mb-3">
-                FREQUENTLY ASKED QUESTIONS
+                {faq.eyebrow[language]}
               </span>
               <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-deep-navy tracking-tight leading-tight mb-4">
-                Got Questions? <br /> We Have Answers
+                {faq.title[language]}
               </h2>
               <p className="text-sm sm:text-base text-gray-600 font-normal leading-relaxed">
-                Find answers to common questions about ground water
-                investigation, deep well drilling, permit compliance (SIPA &
-                NPWPD ABT), and project timelines across Bali & NTB.
+                {faq.subtitle[language]}
               </p>
             </div>
 
@@ -82,10 +47,14 @@ export default function Faq() {
                 </div>
                 <div>
                   <h3 className="text-sm font-bold text-white">
-                    Have a specific project question?
+                    {language === "EN"
+                      ? "Have a specific project question?"
+                      : "Punya pertanyaan seputar proyek Anda?"}
                   </h3>
                   <p className="text-xs text-gray-300 font-light">
-                    Our hydrogeology team is ready to consult.
+                    {language === "EN"
+                      ? "Our hydrogeology team is ready to consult."
+                      : "Tim teknis kami siap memberikan konsultasi."}
                   </p>
                 </div>
               </div>
@@ -94,18 +63,18 @@ export default function Faq() {
                 href="#contact"
                 className="w-1/2 inline-flex items-center justify-center gap-2 px-5 py-3 rounded-full bg-white text-deep-navy text-xs font-bold tracking-wider uppercase transition-all duration-300 hover:bg-warm-white hover:scale-[1.02] active:scale-95 shadow-md"
               >
-                <span>TALK TO AN EXPERT</span>
+                <span>{faq.ctaButton[language]}</span>
               </a>
             </div>
           </div>
 
           {/* Column 2: Right FAQ Accordion List (lg:col-span-7) */}
           <div className="lg:col-span-7 space-y-4">
-            {faqs.map((faq, index) => {
+            {faq.items.map((item, index) => {
               const isOpen = openIndex === index;
               return (
                 <div
-                  key={index}
+                  key={item.id || index}
                   className={`rounded-2xl border transition-all duration-300 overflow-hidden ${
                     isOpen
                       ? "bg-white border-engineering-blue/30 shadow-md"
@@ -117,7 +86,7 @@ export default function Faq() {
                     className="w-full px-6 py-5 flex items-center justify-between text-left focus:outline-none gap-4"
                   >
                     <span className="text-base font-bold text-deep-navy leading-snug">
-                      {faq.question}
+                      {item.question[language]}
                     </span>
                     <div
                       className={`w-8 h-8 rounded-full flex items-center justify-center shrink-0 transition-colors duration-300 ${
@@ -136,7 +105,7 @@ export default function Faq() {
 
                   {isOpen && (
                     <div className="px-6 pb-6 pt-1 text-sm text-gray-600 leading-relaxed font-normal border-t border-gray-100/60 animate-fadeIn">
-                      {faq.answer}
+                      {item.answer[language]}
                     </div>
                   )}
                 </div>

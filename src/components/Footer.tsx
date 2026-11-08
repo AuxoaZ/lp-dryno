@@ -3,23 +3,28 @@
 import React from "react";
 import Logo from "./Logo";
 import { HiMapPin, HiPhone, HiEnvelope } from "react-icons/hi2";
+import { useLanguage } from "@/context/LanguageContext";
+import { translations } from "@/context/translations";
 
 export default function Footer() {
   const [currentYear, setCurrentYear] = React.useState<number>(2026);
+  const { language, content } = useLanguage();
+  const t = translations[language];
+  const contact = content.contact;
 
   React.useEffect(() => {
     setCurrentYear(new Date().getFullYear());
   }, []);
 
   const navLinks = [
-    { name: "HOME", href: "#home" },
-    { name: "ABOUT", href: "#about" },
-    { name: "SERVICES", href: "#services" },
-    { name: "HOW WE WORK", href: "#how-we-work" },
-    { name: "PROJECTS", href: "#projects" },
-    { name: "EQUIPMENT", href: "#equipment" },
-    { name: "FAQ", href: "#faq" },
-    { name: "CONTACT", href: "#contact" },
+    { name: t.nav.home, href: "#home" },
+    { name: t.nav.about, href: "#about" },
+    { name: t.nav.services, href: "#services" },
+    { name: t.nav.howWeWork, href: "#how-we-work" },
+    { name: t.nav.projects, href: "#projects" },
+    { name: t.nav.equipment, href: "#equipment" },
+    { name: t.nav.faq, href: "#faq" },
+    { name: t.nav.contact, href: "#contact" },
   ];
 
   return (
@@ -31,17 +36,14 @@ export default function Footer() {
           <div className="lg:col-span-5 space-y-4">
             <Logo variant="light" />
             <p className="text-xs sm:text-sm text-gray-400 font-light max-w-sm leading-relaxed pt-2">
-              DRYNO — Engineering Water Solution is an integrated ground water
-              solution provider specializing in investigation, deep well
-              drilling, well installation, technical consultation, and SIPA /
-              NPWPD ABT permitting assistance across Bali & NTB.
+              {contact.footerBrandDesc[language]}
             </p>
           </div>
 
           {/* Quick Navigation Links (lg:col-span-3) */}
           <div className="lg:col-span-3 space-y-3">
             <h4 className="text-xs font-bold tracking-widest text-engineering-blue-light uppercase mb-4">
-              QUICK NAVIGATION
+              {t.footer.quickNavTitle}
             </h4>
             <div className="grid grid-cols-2 gap-2 text-xs font-semibold text-gray-300">
               {navLinks.map((link) => (
@@ -59,22 +61,20 @@ export default function Footer() {
           {/* Contact Details (lg:col-span-4) */}
           <div className="lg:col-span-4 space-y-3">
             <h4 className="text-xs font-bold tracking-widest text-engineering-blue-light uppercase mb-4">
-              REGIONAL SERVICE COVERAGE
+              {t.footer.coverageTitle}
             </h4>
             <div className="space-y-2.5 text-xs text-gray-300">
               <div className="flex items-start gap-2.5">
                 <HiMapPin className="w-4 h-4 text-engineering-blue-light shrink-0 mt-0.5" />
-                <span>
-                  Bali • Nusa Lembongan • Nusa Penida • NTB (Lombok & Sumbawa)
-                </span>
+                <span>{contact.coverage}</span>
               </div>
               <div className="flex items-center gap-2.5">
                 <HiPhone className="w-4 h-4 text-engineering-blue-light shrink-0" />
-                <span>+62 857-9209-6854</span>
+                <span>{contact.phoneDisplay}</span>
               </div>
               <div className="flex items-center gap-2.5">
                 <HiEnvelope className="w-4 h-4 text-engineering-blue-light shrink-0" />
-                <span>info@dryno.co.id</span>
+                <span>{contact.email}</span>
               </div>
             </div>
           </div>
@@ -83,17 +83,17 @@ export default function Footer() {
         {/* Bottom Copyright Row */}
         <div className="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs font-medium text-gray-500">
           <p>
-            © {currentYear} DRYNO — Engineering Water Solution. All rights
-            reserved.{" "}
+            © {currentYear} DRYNO — Engineering Water Solution.{" "}
+            {t.footer.allRightsReserved}{" "}
             <span className="text-gray-500 ml-1">
-              In collaboration with{" "}
+              {t.footer.collaborationWith}{" "}
               <a
-                href="https://autoneka.id"
+                href={contact.collaborationUrl || "https://autoneka.id"}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-engineering-blue-light font-semibold"
               >
-                autoneka.id
+                {contact.collaborationName || "autoneka.id"}
               </a>
             </span>
           </p>

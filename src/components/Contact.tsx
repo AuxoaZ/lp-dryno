@@ -9,13 +9,20 @@ import {
   HiCheckCircle,
   HiSparkles,
 } from "react-icons/hi2";
+import { useLanguage } from "@/context/LanguageContext";
+import { translations } from "@/context/translations";
 
 export default function Contact() {
+  const { language, content } = useLanguage();
+  const t = translations[language].contact;
+  const contact = content.contact;
+
   const [formData, setFormData] = useState({
     name: "",
     company: "",
     location: "",
-    projectType: "Villa / Private Estate",
+    projectType:
+      language === "EN" ? "Villa / Private Estate" : "Vila / Hunian Pribadi",
     message: "",
   });
 
@@ -23,18 +30,27 @@ export default function Contact() {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    // Simulate form submission
     setSubmitted(true);
   };
 
-  const projectTypes = [
-    "Villa / Private Estate",
-    "Hotel / Resort",
-    "Residential & Commercial",
-    "Contractor / Developer",
-    "Industrial Facility",
-    "Other",
-  ];
+  const projectTypes =
+    language === "EN"
+      ? [
+          "Villa / Private Estate",
+          "Hotel / Resort",
+          "Residential & Commercial",
+          "Contractor / Developer",
+          "Industrial Facility",
+          "Other",
+        ]
+      : [
+          "Vila / Hunian Pribadi",
+          "Hotel / Resor",
+          "Residensial & Komersial",
+          "Kontraktor / Pengembang",
+          "Fasilitas Industri",
+          "Lainnya",
+        ];
 
   return (
     <section
@@ -42,7 +58,7 @@ export default function Contact() {
       className="relative py-12 sm:py-20 lg:py-24 bg-white text-deep-navy overflow-hidden"
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Navy Card Container (White Section, Navy Card) */}
+        {/* Navy Card Container */}
         <div className="relative rounded-3xl bg-gradient-to-br from-deep-navy via-deep-navy-dark to-charcoal text-white p-6 sm:p-12 lg:p-16 shadow-2xl overflow-hidden">
           {/* Decorative Glowing Orbs */}
           <div className="absolute top-0 right-0 w-96 h-96 bg-engineering-blue/20 rounded-full blur-3xl pointer-events-none" />
@@ -56,19 +72,17 @@ export default function Contact() {
                 <div className="flex items-center gap-2 mb-3 sm:mb-4">
                   <span className="w-6 sm:w-8 h-[2px] bg-engineering-blue-light" />
                   <span className="text-xs font-bold tracking-[0.25em] text-engineering-blue-light uppercase">
-                    GET IN TOUCH
+                    {contact.eyebrow[language]}
                   </span>
                 </div>
 
                 {/* Main CTA Heading */}
                 <h2 className="text-2.5xl sm:text-4xl lg:text-5xl font-black text-white leading-tight uppercase tracking-tight mb-4 sm:mb-6">
-                  DISCUSS YOUR PROJECT
+                  {contact.title[language]}
                 </h2>
 
                 <p className="text-sm sm:text-base text-gray-300 font-light leading-relaxed">
-                  Have a new ground water project or need assistance with deep
-                  well drilling, geoelectric investigation, or SIPA permitting?
-                  Our team is ready to evaluate your site.
+                  {contact.desc[language]}
                 </p>
               </div>
 
@@ -83,7 +97,7 @@ export default function Contact() {
                       OPERATIONAL COVERAGE
                     </h4>
                     <p className="text-sm font-semibold text-white">
-                      Bali • Nusa Lembongan • Nusa Penida • NTB
+                      {contact.coverage}
                     </p>
                   </div>
                 </div>
@@ -97,7 +111,7 @@ export default function Contact() {
                       DIRECT WHATSAPP & PHONE
                     </h4>
                     <p className="text-sm font-semibold text-white">
-                      +62 857-9209-6854
+                      {contact.phoneDisplay}
                     </p>
                   </div>
                 </div>
@@ -111,7 +125,7 @@ export default function Contact() {
                       EMAIL INQUIRIES
                     </h4>
                     <p className="text-sm font-semibold text-white">
-                      info@dryno.co.id
+                      {contact.email}
                     </p>
                   </div>
                 </div>
@@ -121,10 +135,7 @@ export default function Contact() {
               <div className="p-4 rounded-2xl bg-white/5 border border-white/10 flex items-center gap-3">
                 <HiSparkles className="w-5 h-5 text-engineering-blue-light shrink-0" />
                 <p className="text-xs text-gray-300">
-                  <strong className="text-white">
-                    10+ Years Field Experience
-                  </strong>{" "}
-                  in hydrogeology, drilling & regulatory compliance.
+                  {contact.experienceHighlight[language]}
                 </p>
               </div>
             </div>
@@ -137,17 +148,16 @@ export default function Contact() {
                     <HiCheckCircle className="w-10 h-10" />
                   </div>
                   <h3 className="text-2xl font-extrabold text-white">
-                    Thank You for Reaching Out!
+                    {t.formSuccessTitle}
                   </h3>
                   <p className="text-sm text-gray-300 max-w-md mx-auto leading-relaxed">
-                    We have received your project inquiry. Our hydrogeology team
-                    will review your requirements and get back to you shortly.
+                    {t.formSuccessDesc}
                   </p>
                   <button
                     onClick={() => setSubmitted(false)}
-                    className="px-6 py-3 rounded-full bg-white text-deep-navy text-xs font-bold uppercase tracking-wider hover:bg-gray-100 transition-colors"
+                    className="px-6 py-3 rounded-full bg-white text-deep-navy text-xs font-bold uppercase tracking-wider hover:bg-gray-100 transition-colors cursor-pointer"
                   >
-                    Send Another Message
+                    {t.formReset}
                   </button>
                 </div>
               ) : (
@@ -156,7 +166,7 @@ export default function Contact() {
                     {/* Name */}
                     <div>
                       <label className="block text-xs font-bold uppercase tracking-wider text-gray-300 mb-2">
-                        Name *
+                        {t.formName} *
                       </label>
                       <input
                         type="text"
@@ -173,7 +183,7 @@ export default function Contact() {
                     {/* Company / Project Name */}
                     <div>
                       <label className="block text-xs font-bold uppercase tracking-wider text-gray-300 mb-2">
-                        Company / Project Name *
+                        {t.formCompany} *
                       </label>
                       <input
                         type="text"
@@ -192,7 +202,7 @@ export default function Contact() {
                     {/* Project Location */}
                     <div>
                       <label className="block text-xs font-bold uppercase tracking-wider text-gray-300 mb-2">
-                        Project Location *
+                        {t.formLocation} *
                       </label>
                       <input
                         type="text"
@@ -209,7 +219,7 @@ export default function Contact() {
                     {/* Project Type */}
                     <div>
                       <label className="block text-xs font-bold uppercase tracking-wider text-gray-300 mb-2">
-                        Project Type *
+                        {t.formProjectType} *
                       </label>
                       <select
                         value={formData.projectType}
@@ -237,12 +247,16 @@ export default function Contact() {
                   {/* Message */}
                   <div>
                     <label className="block text-xs font-bold uppercase tracking-wider text-gray-300 mb-2">
-                      Message / Project Details *
+                      {t.formMessage} *
                     </label>
                     <textarea
                       rows={4}
                       required
-                      placeholder="Tell us about your water requirements, site conditions, or specific service needs..."
+                      placeholder={
+                        language === "EN"
+                          ? "Tell us about your water requirements, site conditions, or specific service needs..."
+                          : "Ceritakan kebutuhan debit air, kondisi tapak proyek, atau layanan yang dibutuhkan..."
+                      }
                       value={formData.message}
                       onChange={(e) =>
                         setFormData({ ...formData, message: e.target.value })
@@ -256,7 +270,7 @@ export default function Contact() {
                     type="submit"
                     className="w-full inline-flex items-center justify-center gap-3 py-4 rounded-xl bg-engineering-blue hover:bg-engineering-blue-light text-white text-xs font-extrabold tracking-wider uppercase transition-all duration-300 hover:shadow-lg hover:shadow-engineering-blue/30 active:scale-[0.99] group cursor-pointer"
                   >
-                    <span>DISCUSS YOUR PROJECT</span>
+                    <span>{t.formSubmit}</span>
                     <HiPaperAirplane className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />
                   </button>
                 </form>

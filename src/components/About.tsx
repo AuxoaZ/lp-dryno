@@ -15,16 +15,44 @@ import {
   HiChevronDown,
   HiChevronUp,
 } from "react-icons/hi2";
+import { useLanguage } from "@/context/LanguageContext";
 
 export default function About() {
   const [isExpanded, setIsExpanded] = useState(false);
+  const { language, content } = useLanguage();
+  const about = content.about;
 
   const clientTypes = [
-    { label: "Villas & Private Estates", icon: HiHomeModern },
-    { label: "Hotels & Resorts", icon: HiBuildingOffice2 },
-    { label: "Residential & Commercial", icon: HiBuildingOffice2 },
-    { label: "Contractors & Developers", icon: HiWrenchScrewdriver },
-    { label: "Industrial Facilities", icon: HiBriefcase },
+    {
+      label:
+        language === "EN"
+          ? "Villas & Private Estates"
+          : "Vila & Hunian Pribadi",
+      icon: HiHomeModern,
+    },
+    {
+      label: language === "EN" ? "Hotels & Resorts" : "Hotel & Resor",
+      icon: HiBuildingOffice2,
+    },
+    {
+      label:
+        language === "EN"
+          ? "Residential & Commercial"
+          : "Residensial & Komersial",
+      icon: HiBuildingOffice2,
+    },
+    {
+      label:
+        language === "EN"
+          ? "Contractors & Developers"
+          : "Kontraktor & Pengembang",
+      icon: HiWrenchScrewdriver,
+    },
+    {
+      label:
+        language === "EN" ? "Industrial Facilities" : "Fasilitas Industri",
+      icon: HiBriefcase,
+    },
   ];
 
   return (
@@ -40,22 +68,19 @@ export default function About() {
             <div>
               {/* Category Tagline */}
               <span className="text-xs font-bold tracking-[0.25em] text-gray-400 uppercase block mb-3">
-                ABOUT DRYNO
+                {about.category[language]}
               </span>
 
               {/* Main Heading */}
               <h2 className="text-2xl sm:text-4xl lg:text-5xl font-bold text-deep-navy leading-[1.12] tracking-tight mb-2 lg:mb-6">
-                Integrated <br />
-                Ground Water <br />
-                Solution Provider
+                {about.titleLine1[language]} <br />
+                {about.titleLine2[language]} <br />
+                {about.titleLine3[language]}
               </h2>
 
               {/* Core Description */}
               <p className="text-sm sm:text-base text-gray-600 leading-relaxed font-normal">
-                DRYNO is an integrated ground water solution provider
-                specializing in ground water investigation, deep well drilling,
-                well installation, technical consultation, and ground
-                water-related permit and administrative assistance.
+                {about.description[language]}
               </p>
             </div>
 
@@ -65,7 +90,11 @@ export default function About() {
                 onClick={() => setIsExpanded(!isExpanded)}
                 className="inline-flex items-center gap-4 px-7 py-3.5 rounded-full bg-deep-navy text-white text-xs font-bold tracking-wider uppercase transition-all duration-300 hover:bg-engineering-blue hover:shadow-lg hover:scale-105 active:scale-95 group"
               >
-                <span>{isExpanded ? "SHOW LESS" : "LEARN MORE"}</span>
+                <span>
+                  {isExpanded
+                    ? about.showLess[language]
+                    : about.learnMore[language]}
+                </span>
                 <span className="w-6 h-6 rounded-full bg-white/20 flex items-center justify-center transition-transform duration-300 group-hover:translate-x-1">
                   {isExpanded ? (
                     <HiChevronUp className="w-3.5 h-3.5 text-white" />
@@ -79,13 +108,13 @@ export default function About() {
 
           {/* Column 2: Highlights & Badges List (lg:col-span-3) */}
           <div className="lg:col-span-3 flex flex-col justify-center space-y-7 border-y lg:border-y-0 lg:border-x border-gray-100 py-6 lg:py-0 lg:px-8">
-            {/* Highlight 1: 10+ Years */}
+            {/* Highlight 1: Years Experience */}
             <div className="flex items-start gap-4">
               <div className="text-3xl sm:text-4xl font-extrabold text-deep-navy leading-none">
-                10+
+                {about.yearsExperience}
               </div>
-              <div className="text-xs font-semibold text-gray-600 leading-tight">
-                Years of <br /> Field Experience
+              <div className="text-xs font-semibold text-gray-600 leading-tight whitespace-pre-line">
+                {about.fieldExp[language]}
               </div>
             </div>
 
@@ -96,10 +125,10 @@ export default function About() {
               </div>
               <div>
                 <div className="text-xs font-bold text-deep-navy">
-                  Bali • Nusa Lembongan
+                  {about.coverageLine1}
                 </div>
                 <div className="text-xs font-medium text-gray-500">
-                  Nusa Penida • NTB
+                  {about.coverageLine2}
                 </div>
               </div>
             </div>
@@ -110,11 +139,8 @@ export default function About() {
                 <HiBriefcase className="w-5 h-5" />
               </div>
               <div>
-                <div className="text-xs font-bold text-deep-navy">
-                  Project-Based
-                </div>
-                <div className="text-xs font-medium text-gray-500">
-                  Approach
+                <div className="text-xs font-bold text-deep-navy whitespace-pre-line">
+                  {about.approach[language]}
                 </div>
               </div>
             </div>
@@ -125,11 +151,8 @@ export default function About() {
                 <HiCog6Tooth className="w-5 h-5" />
               </div>
               <div>
-                <div className="text-xs font-bold text-deep-navy">
-                  Technical &
-                </div>
-                <div className="text-xs font-medium text-gray-500">
-                  Regulatory Support
+                <div className="text-xs font-bold text-deep-navy whitespace-pre-line">
+                  {about.technical[language]}
                 </div>
               </div>
             </div>
@@ -138,9 +161,13 @@ export default function About() {
           {/* Column 3: Featured Coastal Image Container (lg:col-span-4) */}
           <div className="lg:col-span-4 relative min-h-[320px] lg:min-h-[380px] rounded-2xl overflow-hidden shadow-xl group">
             <Image
-              src="/images/about-villa.jpg"
+              src={about.image || "/images/about-villa.jpg"}
               alt="Supporting Development with Reliable Water Solutions in Bali"
               fill
+              unoptimized={
+                about.image?.startsWith("http") ||
+                about.image?.startsWith("/images/uploads/")
+              }
               className="object-cover object-center transition-transform duration-700 group-hover:scale-105"
             />
             {/* Gradient Overlay */}
@@ -148,18 +175,15 @@ export default function About() {
 
             {/* Overlay Text */}
             <div className="absolute bottom-0 left-0 right-0 p-6 sm:p-8 z-10 text-white">
-              <h3 className="text-xl sm:text-2xl font-black tracking-tight leading-tight mb-3 drop-shadow-md">
-                Supporting <br />
-                Development <br />
-                With Reliable <br />
-                Water Solutions
+              <h3 className="text-xl sm:text-2xl font-black tracking-tight leading-tight mb-3 drop-shadow-md max-w-[240px]">
+                {about.bannerOverlayText[language]}
               </h3>
               <div className="w-1/2 h-1 bg-engineering-blue-light rounded-full" />
             </div>
           </div>
         </div>
 
-        {/* Expanded Details Section (Smoothly Toggled or Always Accessible) */}
+        {/* Expanded Details Section */}
         <div
           className={`transition-all duration-500 ease-in-out ${
             isExpanded
@@ -176,14 +200,11 @@ export default function About() {
                     <HiBuildingOffice2 className="w-5 h-5" />
                   </div>
                   <h4 className="text-base font-extrabold text-deep-navy uppercase tracking-wider">
-                    SECTORS WE SERVE
+                    {about.sectorsTitle[language]}
                   </h4>
                 </div>
                 <p className="text-sm text-gray-600 leading-relaxed mb-6 font-normal">
-                  We work with villas, private estates, hotels, resorts,
-                  residential and commercial developments, contractors,
-                  developers, and industrial facilities requiring ground water
-                  solutions for their projects.
+                  {about.sectorsDesc[language]}
                 </p>
               </div>
 
@@ -208,25 +229,21 @@ export default function About() {
                     <HiSparkles className="w-5 h-5" />
                   </div>
                   <h4 className="text-base font-extrabold text-deep-navy uppercase tracking-wider">
-                    Investigate, Drill, and Install
+                    {about.processTitle[language]}
                   </h4>
                 </div>
                 <p className="text-sm text-gray-600 leading-relaxed mb-6 font-normal">
-                  Our approach begins by understanding the project&apos;s water
-                  requirements and site conditions. When required, ground water
-                  investigation is conducted to obtain subsurface information
-                  and identify potential ground water zones before determining
-                  the appropriate drilling approach.
+                  {about.processDesc[language]}
                 </p>
               </div>
 
               <div className="p-4 rounded-xl bg-white border border-gray-200/80">
                 <div className="text-xs font-bold text-deep-navy mb-1 flex items-center gap-2">
                   <span className="w-2 h-2 rounded-full bg-engineering-blue-light" />
-                  Data-Driven Drilling Strategy
+                  {about.dataDrivenTitle[language]}
                 </div>
                 <p className="text-xs text-gray-500">
-                  Minimizing risk & optimizing long-term ground water yield.
+                  {about.dataDrivenDesc[language]}
                 </p>
               </div>
             </div>
@@ -239,23 +256,20 @@ export default function About() {
                     <HiShieldCheck className="w-5 h-5" />
                   </div>
                   <h4 className="text-base font-extrabold text-deep-navy uppercase tracking-wider">
-                    PERMITTING & COMPLIANCE
+                    {about.permitTitle[language]}
                   </h4>
                 </div>
                 <p className="text-sm text-gray-600 leading-relaxed mb-6 font-normal">
-                  Beyond ground water investigation and drilling, DRYNO also
-                  assists clients with SIPA and NPWPD ABT processing, providing
-                  a more integrated solution from initial investigation to
-                  ground water utilization compliance.
+                  {about.permitDesc[language]}
                 </p>
               </div>
 
               <div className="flex items-center gap-2 pt-2">
                 <span className="px-3 py-1.5 rounded-lg bg-deep-navy text-white text-xs font-bold tracking-wider uppercase shadow-xs">
-                  SIPA PERMIT
+                  {language === "EN" ? "SIPA PERMIT" : "IZIN SIPA"}
                 </span>
                 <span className="px-3 py-1.5 rounded-lg bg-engineering-blue text-white text-xs font-bold tracking-wider uppercase shadow-xs">
-                  NPWPD ABT
+                  {language === "EN" ? "NPWPD ABT" : "PAJAK ABT"}
                 </span>
               </div>
             </div>
