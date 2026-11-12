@@ -14,8 +14,15 @@ import { useLanguage } from "@/context/LanguageContext";
 import { translations } from "@/context/translations";
 
 export default function WaterTankerCalculator() {
-  const { language } = useLanguage();
+  const { language, content } = useLanguage();
   const t = translations[language].calculator;
+
+  const phoneNumber = content.contact?.whatsappNumber || "6285792096854";
+  const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(
+    language === "ID"
+      ? "Halo DRYNO, saya tertarik membuat sumur dalam mandiri untuk properti saya. Mohon bantuannya untuk konsultasi."
+      : "Hello DRYNO, I'm interested in an independent deep well for my property. I'd like to consult with your engineers."
+  )}`;
 
   // Inputs
   const [dailyNeed, setDailyNeed] = useState<number>(1000);
@@ -406,7 +413,9 @@ export default function WaterTankerCalculator() {
                 </p>
               </div>
               <a
-                href="#contact"
+                href={whatsappUrl}
+                target="_blank"
+                rel="noopener noreferrer"
                 className="inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-full bg-deep-navy hover:bg-engineering-blue text-white text-xs font-bold tracking-wider uppercase transition-colors shrink-0"
               >
                 <span>{t.ctaButton}</span>
